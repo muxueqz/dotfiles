@@ -1,0 +1,4 @@
+rofi.modi: calc:/opt/muxueqz-sh/rofi-calc.sh
+! Auto-completion
+rofi.kb-row-select:     Tab
+rofi.kb-row-tab:     Alt+Tab
