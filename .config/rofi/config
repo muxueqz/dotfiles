@@ -1,4 +1,8 @@
-rofi.modi: calc:/opt/muxueqz-sh/rofi-calc.sh
+/* rofi.modi: Calc:/opt/muxueqz-sh/rofi-calc.sh,Huami:/opt/muxueqz-sh/rofi-huami.sh */
+rofi.modi: Calc:/opt/muxueqz-sh/rofi-calc.sh
 ! Auto-completion
 rofi.kb-row-select:     Tab
 rofi.kb-row-tab:     Alt+Tab
+rofi.sort: true
+rofi.disable-history: true
+rofi.theme: ./theme.rasi
