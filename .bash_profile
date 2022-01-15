@@ -78,6 +78,7 @@ workon (){
 }
 
 alias vim-notmp='firejail --env=PATH=/data/work/project/x-apps-in-container/vbin/:$PATH \
+  --deterministic-exit-code \
   --env=GOTMPDIR=/tmp --noprofile --private-tmp lvim'
 alias vim-no-jail='lvim'
 alias vim='vim-notmp'
