@@ -1,0 +1,1 @@
+/home/muxueqz/.asdf/completions/asdf.bash
