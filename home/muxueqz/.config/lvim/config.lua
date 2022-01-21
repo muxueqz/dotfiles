@@ -129,19 +129,23 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- end
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   { exe = "black", filetypes = { "python" } },
---   { exe = "isort", filetypes = { "python" } },
---   {
---     exe = "prettier",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     args = { "--print-with", "100" },
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  -- { exe = "python", filetypes = { "json" },
+  --   command = { "/usr/bin/python" },
+  --   args = { "-m", "json.tool" },
+  -- },
+  { exe = "black", filetypes = { "python" } },
+  -- { exe = "isort", filetypes = { "python" } },
+  -- {
+  --   exe = "prettier",
+  --   ---@usage arguments to pass to the formatter
+  --   -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+  --   args = { "--print-with", "100" },
+  --   ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+  --   filetypes = { "typescript", "typescriptreact" },
+  -- },
+}
 
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
@@ -206,6 +210,33 @@ lvim.plugins = {
     require("lspconfig")["nimls"].setup(opts)
     end,
   },
+  -- {
+  --   "stefanos82/nelua.vim",
+  --   ft = "nelua",
+  --   config = function()
+  --   -- local opts = {cmd={
+  --   --     "/dev/shm/temp-workspaces/nelua-lsp/nelua-lsp.sh"
+  --   --   }}
+  --   -- local configs = require 'lspconfig.configs'
+  --   --  -- Check if the config is already defined (useful when reloading this file)
+  --   --  if not configs.nelua_lsp then
+  --   --    configs.nelua_lsp = {
+  --   --      default_config = {
+  --   --       cmd = {
+  --   --           "/dev/shm/temp-workspaces/nelua-lsp/nelua-lsp.sh"
+  --   --         };
+  --   --        filetypes = {'nelua'};
+  --   --        root_dir = function(fname)
+  --   --          return lspconfig.util.find_git_ancestor(fname)
+  --   --        end;
+  --   --        settings = {};
+  --   --      };
+  --   --    }
+  --   --  end
+  --   -- require("lspconfig")["nelua_lsp"].setup(opts)
+  --   -- lspconfig.nelua_lsp.setup()
+  --   end,
+  -- },
   {
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
