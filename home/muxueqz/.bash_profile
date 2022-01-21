@@ -114,7 +114,7 @@ gapclient () {
 # alias set_proxy="export http_proxy='http://127.0.0.1:11082' ; export https_proxy=\$http_proxy"
 set-proxy() {
   if [[ -z $1 ]] ; then
-    export http_proxy="http://127.0.0.1:11082"
+    export http_proxy="http://default-proxy-server:11082"
   else
     export http_proxy="http://${1}"
   fi
