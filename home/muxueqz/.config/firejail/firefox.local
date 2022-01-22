@@ -11,12 +11,6 @@ ignore dbus-user none
 ignore nodbus
 ignore protocol
 
-noblacklist ${HOME}/.gnupg
-whitelist ${HOME}/.gnupg
-whitelist ${HOME}/.password-store/
-include allow-python3.inc
-noblacklist /usr/lib/passff/passff.py
-
 whitelist /usr/share/pyshared/
 noblacklist /usr/share/pyshared/
 
@@ -35,12 +29,11 @@ whitelist ${HOME}/.local/share/Kingsoft
 read-only /opt/kingsoft
 
 private-dev
-    # --whitelist=$HOME/.config/fcitx \
 whitelist ${HOME}/.pulse-cookie
 whitelist ${HOME}/Downloads
 whitelist ${RUNUSER}/pulse
-whitelist ${RUNUSER}/gnupg
 whitelist /data/iso/Downloads/
+whitelist /data/iso/下载/
 read-only ${HOME}/.Xauthority
 read-only ${HOME}/.config/fcitx
 
@@ -49,8 +42,7 @@ read-only ${HOME}/.config/google-chrome-extensions
 
 read-only /etc/passwd
 read-only ${RUNUSER}/bus
-# read-only /root
-# read-only /bin
 read-only /etc/pulse
 
 ignore private-tmp
+include pass.inc
