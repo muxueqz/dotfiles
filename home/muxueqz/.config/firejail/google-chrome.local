@@ -1,0 +1,29 @@
+dbus-user filter
+dbus-user.talk org.freedesktop.Notifications
+
+dbus-user.talk org.freedesktop.portal.Fcitx
+
+# ignore dbus-user none
+
+noblacklist ${HOME}/.kingsoft
+noblacklist ${HOME}/.config/Kingsoft
+noblacklist ${HOME}/.local/share/Kingsoft
+whitelist ${HOME}/.kingsoft
+whitelist ${HOME}/.config/Kingsoft
+whitelist ${HOME}/.local/share/Kingsoft
+read-only /opt/kingsoft
+
+private-dev
+whitelist ${HOME}/.pulse-cookie
+whitelist ${HOME}/Downloads
+whitelist ${RUNUSER}/pulse
+# whitelist ${RUNUSER}/gnupg
+whitelist /data/iso/Downloads/
+whitelist /data/iso/下载/
+read-only ${HOME}/.Xauthority
+
+whitelist ${HOME}/.config/google-chrome-extensions
+read-only ${HOME}/.config/google-chrome-extensions
+
+ignore private-tmp
+include pass.inc
