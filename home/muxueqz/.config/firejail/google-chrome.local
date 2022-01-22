@@ -23,7 +23,7 @@ whitelist /data/iso/下载/
 read-only ${HOME}/.Xauthority
 
 whitelist ${HOME}/.config/google-chrome-extensions
-read-only ${HOME}/.config/google-chrome-extensions
+whitelist ${HOME}/.config/google-chrome-dev-extensions
 
 ignore private-tmp
 include pass.inc
