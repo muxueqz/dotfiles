@@ -22,6 +22,7 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.keys.normal_mode["<F5>"] = ":buffers<CR>:buffer<Space>"
 lvim.keys.normal_mode["<F5>"] = ":Telescope buffers<cr>"
+lvim.keys.normal_mode["<Leader>bs"] = ":Telescope buffers<cr>"
 lvim.keys.normal_mode["<Leader>gm"] = ":Git commit %<cr>"
 for i=1,9 do
   local key = string.format("<A-%s>", i)
