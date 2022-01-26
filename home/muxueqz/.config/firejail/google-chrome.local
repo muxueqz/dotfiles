@@ -20,6 +20,7 @@ whitelist ${RUNUSER}/pulse
 # whitelist ${RUNUSER}/gnupg
 whitelist /data/iso/Downloads/
 whitelist /data/iso/下载/
+whitelist /data/work/projects/xsj/Programmer-s-Almanac/
 read-only ${HOME}/.Xauthority
 
 whitelist ${HOME}/.config/google-chrome-extensions
