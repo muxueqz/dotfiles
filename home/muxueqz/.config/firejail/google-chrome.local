@@ -28,3 +28,4 @@ whitelist ${HOME}/.config/google-chrome-dev-extensions
 
 ignore private-tmp
 include pass.inc
+keep-dev-shm
