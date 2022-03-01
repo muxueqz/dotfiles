@@ -95,8 +95,8 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
 
--- ---@usage disable automatic installation of servers
--- lvim.lsp.automatic_servers_installation = false
+---@usage disable automatic installation of servers
+lvim.lsp.automatic_servers_installation = false
 
 -- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
@@ -204,11 +204,17 @@ lvim.plugins = {
       --   "/data/work/projects/nim-src/",
       -- }}
       -- )
+      vim.g.nvim_nim_enable_default_binds = 0
+      vim.cmd [[
+       let g:nvim_nim_enable_default_binds = 0
+      ]]
     local opts = {cmd={
         "nimlsp",
         "/data/work/projects/nim-src/",
       }}
     require("lspconfig")["nimls"].setup(opts)
+    vim.api.nvim_set_keymap("n", "gd", ":Telescope lsp_definitions<cr>", { silent = true })
+    vim.api.nvim_set_keymap("n", "gr", ":Telescope lsp_references<cr>", { silent = true })
     end,
   },
   -- {
