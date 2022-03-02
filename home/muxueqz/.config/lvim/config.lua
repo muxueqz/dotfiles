@@ -205,9 +205,6 @@ lvim.plugins = {
       -- }}
       -- )
       vim.g.nvim_nim_enable_default_binds = 0
-      vim.cmd [[
-       let g:nvim_nim_enable_default_binds = 0
-      ]]
     local opts = {cmd={
         "nimlsp",
         "/data/work/projects/nim-src/",
