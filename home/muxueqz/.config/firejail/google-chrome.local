@@ -28,4 +28,5 @@ whitelist ${HOME}/.config/google-chrome-dev-extensions
 
 ignore private-tmp
 include pass.inc
+include allow-busybox.inc
 keep-dev-shm

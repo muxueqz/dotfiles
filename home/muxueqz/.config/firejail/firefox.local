@@ -46,4 +46,5 @@ read-only /etc/pulse
 
 ignore private-tmp
 include pass.inc
+include allow-busybox.inc
 keep-dev-shm

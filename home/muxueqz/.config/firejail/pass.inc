@@ -5,6 +5,10 @@ ignore dbus-user none
 ignore nodbus
 ignore protocol
 
+mkdir ${HOME}/.password-store
+ignore blacklist ${HOME}/.password-store
+noblacklist ${HOME}/.password-store
+
 noblacklist ${HOME}/.gnupg
 whitelist ${HOME}/.gnupg
 whitelist ${HOME}/.password-store/
