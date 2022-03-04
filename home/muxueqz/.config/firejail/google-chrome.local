@@ -26,7 +26,11 @@ read-only ${HOME}/.Xauthority
 whitelist ${HOME}/.config/google-chrome-extensions
 whitelist ${HOME}/.config/google-chrome-dev-extensions
 
+# Fix fonts
+whitelist /usr/share/fonts/
+
 ignore private-tmp
 include pass.inc
 include allow-busybox.inc
+include whitelist-usr-share-common.inc
 keep-dev-shm
