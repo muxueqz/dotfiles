@@ -18,6 +18,9 @@ export GTK_IM_MODULE=fcitx
 export JAVA_HOME=/opt/jre
 export PATH=$HOME/.asdf/shims_faster/:$HOME/.local/bin/:$PATH:/sbin:/usr/sbin:$HOME/bin:/opt/muxueqz-sh/:/opt/muxueqz-py:$JAVA_HOME/bin:/opt/Palm/novacom/:/home/muxueqz/.nimble/bin/:/data/work/project/node/bin/
 #export PAGER='vim -R -'
+export PAGER='less'
+# export PAGER='/usr/share/nvim/runtime/macros/less.sh'
+export MANPAGER='vim -u /usr/share/nvim/runtime/macros/less.vim -c "noremap gg :1<CR>" +Man!'
 export GOTMPDIR=/tmp/build-tmps/
 
 #alias bjovpn='sudo ifconfig eth0 down; sudo pkill dhclient; sudo ifconfig eth0 10.200.4.150 up ;sudo route add default gw 10.200.6.201; cd /media/ext4/update/openvpn/xlqy-vpn/;sudo openvpn --config X100-OpenVPN.ovpn --http-proxy 10.200.2.0 8080 --redirect-gateway;cd -'
