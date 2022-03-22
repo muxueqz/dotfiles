@@ -184,7 +184,6 @@ require('dap.ext.vscode').load_launchjs()
 
 
 lvim.plugins = {
-  -- {"wsdjeg/vim-nim"},
   -- {
   -- "plasticboy/vim-markdown",
   --   -- ft = "markdown",
@@ -199,19 +198,20 @@ lvim.plugins = {
     "wsdjeg/vim-nim",
     ft = "nim",
     config = function()
-      -- require("lvim.lsp.manager").setup("nimls", {cmd={
-      --   "nimlsp",
-      --   "/data/work/projects/nim-src/",
-      -- }}
-      -- )
       vim.g.nvim_nim_enable_default_binds = 0
-    local opts = {cmd={
+      local opts = {cmd={
         "nimlsp",
         "/data/work/projects/nim-src/",
       }}
+    -- local opts = {cmd={
+    --     "/dev/shm/temp-workspaces/langserver/nimls",
+    --   }}
     require("lspconfig")["nimls"].setup(opts)
-    vim.api.nvim_set_keymap("n", "gd", ":Telescope lsp_definitions<cr>", { silent = true })
-    vim.api.nvim_set_keymap("n", "gr", ":Telescope lsp_references<cr>", { silent = true })
+    vim.api.nvim_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<cr>", { silent = true })
+    vim.api.nvim_set_keymap("n", "gr", ":lua vim.lsp.buf.references()<cr>", { silent = true })
+    vim.api.nvim_set_keymap("n", "K", ":lua vim.lsp.buf.hover()<cr>", { silent = true })
+    vim.api.nvim_set_keymap("n", "gi", ":lua vim.lsp.buf.implementation()<cr>", { silent = true })
+    -- vim.api.nvim_set_keymap("n", "gr", ":Telescope lsp_references<cr>", { silent = true })
     end,
   },
   -- {
@@ -276,14 +276,6 @@ lvim.plugins = {
     },
     ft = {"fugitive"}
   },
-  -- {
-  --   'phaazon/hop.nvim',
-  --   branch = 'v1', -- optional but strongly recommended
-  --   config = function()
-  --     -- you can configure Hop the way you like here; see :h hop-config
-  --     require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-  --   end
-  -- },
   {
     "phaazon/hop.nvim",
     event = "BufRead",
