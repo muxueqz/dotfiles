@@ -305,11 +305,13 @@ parse_git_branch ()
     local branchColor="$SUCCESS_FG";
     local branch=$(git branch --show-current 2>/dev/null);
     if [[ ${branch} != '' ]]; then
-        printf "$INFO_FG$branchBackColor$GIT_SEPARATOR$branchColor$branchBackColor${branch}$COMMON_LIGHT_FG$consoleBackColor$GIT_SEPARATOR$RESET";
+        echo -e "$INFO_FG$branchBackColor$GIT_SEPARATOR$branchColor$branchBackColor${branch}$COMMON_LIGHT_FG$consoleBackColor$GIT_SEPARATOR$RESET";
     else
-        printf "$INFO_FG$consoleBackColor$GIT_SEPARATOR$RESET";
+        echo -e "$INFO_FG$consoleBackColor$GIT_SEPARATOR$RESET";
     fi
 }
 # from miniline.sh
-export PS1='\[\033[44m\]\[\033[1;37m\] \w \[\033[0m\]`parse_git_branch`\[\033[40m\]\[\033[1;37m\] $ \[\033[40m\]\[\033[0;30m\]\[\033[0m\] '
+# export PS1='\[\033[44m\]\[\033[1;37m\] \w \[\033[0m\]`parse_git_branch`\[\033[40m\]\[\033[1;37m\] \$ \[\033[40m\]\[\033[0;30m\]\[\033[0m\] '
+# export PS1='\[\033[44m\]\[\033[1;37m\] \w \[\033[0m\]\[`parse_git_branch`\]\[\033[40m\]\[\033[1;37m\] \$ \[\033[40m\]\[\033[0;30m\]\[\033[0m\] '
+source ~/workspaces/powerline-bash/.powerline-bash.sh
 source ~/.dotfiles/$HOME/.bash_completion
