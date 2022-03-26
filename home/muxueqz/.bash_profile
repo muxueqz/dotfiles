@@ -312,3 +312,4 @@ parse_git_branch ()
 }
 # from miniline.sh
 export PS1='\[\033[44m\]\[\033[1;37m\] \w \[\033[0m\]`parse_git_branch`\[\033[40m\]\[\033[1;37m\] $ \[\033[40m\]\[\033[0;30m\]\[\033[0m\] '
+source ~/.dotfiles/$HOME/.bash_completion
