@@ -288,3 +288,27 @@ temp-workspaces() {
   cd /dev/shm/temp-workspaces/
 }
 alias tw=temp-workspaces
+
+parse_git_branch () 
+{ 
+    local readonly GIT_SEPARATOR='';
+    local readonly INFO_FG='\033[0;34m';
+    local readonly SUCCESS_FG="\033[0;12m";
+    local readonly COMMON_INV_FG="\033[0;30m";
+    local readonly COMMON_LIGHT_FG="\033[0;36m";
+    local readonly SUCCESS_BG="\033[46m";
+    local readonly COMMON_BG="\033[40m";
+    local readonly RESET='\033[0m';
+    local consoleBackColor="$COMMON_BG";
+    local consoleColor="$COMMON_INV_FG";
+    local branchBackColor="$SUCCESS_BG";
+    local branchColor="$SUCCESS_FG";
+    local branch=$(git branch --show-current 2>/dev/null);
+    if [[ ${branch} != '' ]]; then
+        printf "$INFO_FG$branchBackColor$GIT_SEPARATOR$branchColor$branchBackColor${branch}$COMMON_LIGHT_FG$consoleBackColor$GIT_SEPARATOR$RESET";
+    else
+        printf "$INFO_FG$consoleBackColor$GIT_SEPARATOR$RESET";
+    fi
+}
+# from miniline.sh
+export PS1='\[\033[44m\]\[\033[1;37m\] \w \[\033[0m\]`parse_git_branch`\[\033[40m\]\[\033[1;37m\] $ \[\033[40m\]\[\033[0;30m\]\[\033[0m\] '
