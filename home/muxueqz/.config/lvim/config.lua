@@ -16,6 +16,16 @@ vim.cmd [[
   set nofoldenable
 ]]
 
+-- local ugrep_vimgrep_arguments = {
+--             'ugrep',
+--             '-RIjnkz',
+--             '--color=never',
+--             '--hidden',
+--             '--ignore-files',
+--             '--exclude-dir=".git"'
+--           }
+lvim.builtin.telescope.defaults.vimgrep_arguments = {"/opt/muxueqz-sh/vimgrep.lua"}
+
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
@@ -26,7 +36,8 @@ lvim.keys.normal_mode["<Leader>bs"] = ":Telescope buffers<cr>"
 lvim.keys.normal_mode["<Leader>gm"] = ":Git commit %<cr>"
 for i=1,9 do
   local key = string.format("<A-%s>", i)
-  local value = string.format(":BufferGoto %s<CR>" , i)
+  -- local value = string.format(":BufferGoto %s<CR>" , i)
+  local value = string.format(":BufferLineGoToBuffer %s<CR>" , i)
   lvim.keys.normal_mode[key] = value
 end
 -- unmap a default keymapping
@@ -66,7 +77,7 @@ end
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
+-- lvim.builtin.dashboard.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.dap.active = true
@@ -195,6 +206,19 @@ lvim.plugins = {
   --   end,
   -- },
   {
+    "preservim/vim-markdown",
+    ft = "markdown",
+    config = function()
+      vim.g.vim_markdown_auto_insert_bullets = 1
+      -- vim.g.vim_markdown_new_list_item_indent = 1
+    end,
+  },
+  {"dkarter/bullets.vim"},
+  -- {
+  --   'romgrk/barbar.nvim',
+  --   requires = {'kyazdani42/nvim-web-devicons'}
+  -- },
+  {
     "wsdjeg/vim-nim",
     ft = "nim",
     config = function()
@@ -242,16 +266,28 @@ lvim.plugins = {
   --   end,
   -- },
   {
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
+    "muxueqz/previm",
     ft = "markdown",
     config = function()
-      vim.g.mkdp_auto_start = 1
-      vim.cmd [[
-        nmap <Space>mp <Plug>MarkdownPreview
-      ]]
+      vim.g.previm_open_cmd = 'xdg-open'
+      vim.g.previm_custom_preview_base_dir = '/dev/shm/previm_cache/'
+      vim.api.nvim_set_keymap("n", "<Space>mp", ":PrevimOpen<cr>", { silent = true })
+  --     -- vim.cmd [[
+  --     --   nmap <Space>mp <Plug>MarkdownPreview
+  --     -- ]]
     end,
   },
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   run = "cd app && npm install",
+  --   ft = "markdown",
+  --   config = function()
+  --     vim.g.mkdp_auto_start = 1
+  --     vim.cmd [[
+  --       nmap <Space>mp <Plug>MarkdownPreview
+  --     ]]
+  --   end,
+  -- },
   {
     "mattn/vim-gist",
     event = "BufRead",
