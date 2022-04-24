@@ -71,7 +71,7 @@ alias muxueqz_light_proxy="sh /data/work/project/firejail-profiles/v2ray.sh"
 alias muxueqz_light_proxy="sh /data/work/project/firejail-profiles/clash.sh"
 alias worklog_day="cd /data/work/project/bespin/bp-auto-worklog/; bash auto_worklog.sh day; cd -"
 alias worklog_week="cd /data/work/project/bespin/bp-auto-worklog/; vim auto_worklog.sh && bash auto_worklog.sh week ; cd -"
-alias pretty_json='json_pp -json_opt pretty,utf8'
+alias pretty_json='python3 -m json.tool --no-ensure-ascii'
 alias bp_gitclone='git clone -c user.email=mingyuan.zhang@bespinglobal.cn -c user.name=张明源 '
 alias weekly-report='python /opt/muxueqz-py/github_weekly.py'
 alias switch-edp-dispaly='xrandr --output eDP-1 --auto --mode 1600x900 '
