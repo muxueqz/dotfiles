@@ -268,10 +268,10 @@ _filedir ()
     fi
 }
 
-steam_run() {
+steam_start() {
   udisksctl mount --block-device /dev/disk/by-label/usb_data
-  cd /media/muxueqz/usb_data/steam_env/
-  [[ ! -d rootfs/tmp/ ]] && sudo mount -t overlay overlay -olowerdir=/,upperdir=upperdir/,workdir=workdir/ rootfs/
+  # cd /media/muxueqz/usb_data/steam_env/
+  # [[ ! -d rootfs/tmp/ ]] && sudo mount -t overlay overlay -olowerdir=/,upperdir=upperdir/,workdir=workdir/ rootfs/
   bash -x /data/work/project/firejail-profiles/steam-in-nspawn.sh 
 }
 
