@@ -22,6 +22,7 @@ export PAGER='less'
 # export PAGER='/usr/share/nvim/runtime/macros/less.sh'
 export MANPAGER='vim -u /usr/share/nvim/runtime/macros/less.vim -c "noremap gg :1<CR>" +Man!'
 export GOTMPDIR=/tmp/build-tmps/
+export CM_LAUNCHER=~/.local/bin/clipmenu-launcher
 
 #alias bjovpn='sudo ifconfig eth0 down; sudo pkill dhclient; sudo ifconfig eth0 10.200.4.150 up ;sudo route add default gw 10.200.6.201; cd /media/ext4/update/openvpn/xlqy-vpn/;sudo openvpn --config X100-OpenVPN.ovpn --http-proxy 10.200.2.0 8080 --redirect-gateway;cd -'
 alias ls='ls --color=auto'
@@ -71,7 +72,7 @@ alias muxueqz_light_proxy="sh /data/work/project/firejail-profiles/v2ray.sh"
 alias muxueqz_light_proxy="sh /data/work/project/firejail-profiles/clash.sh"
 alias worklog_day="cd /data/work/project/bespin/bp-auto-worklog/; bash auto_worklog.sh day; cd -"
 alias worklog_week="cd /data/work/project/bespin/bp-auto-worklog/; vim auto_worklog.sh && bash auto_worklog.sh week ; cd -"
-alias pretty_json='python3 -m json.tool --no-ensure-ascii'
+alias pretty_json='jello'
 alias bp_gitclone='git clone -c user.email=mingyuan.zhang@bespinglobal.cn -c user.name=张明源 '
 alias weekly-report='python /opt/muxueqz-py/github_weekly.py'
 alias switch-edp-dispaly='xrandr --output eDP-1 --auto --mode 1600x900 '
