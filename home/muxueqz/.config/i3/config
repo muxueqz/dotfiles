@@ -62,8 +62,8 @@ bindsym $mod+p exec --no-startup-id rofi -show run
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
+bindsym $mod+j focus next
+bindsym $mod+k focus prev
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
@@ -97,7 +97,12 @@ bindsym $mod+v split v
 bindsym $mod+F11 fullscreen toggle
 bindsym $mod+F8 exec --no-startup-id sudo /usr/bin/brightness-set down
 bindsym $mod+F9 exec --no-startup-id sudo /usr/bin/brightness-set up
-bindsym $mod+Shift+Delete --release exec --no-startup-id slock
+# bindsym $mod+Shift+Delete --release exec --no-startup-id slock
+bindsym $mod+Shift+Delete --release exec --no-startup-id XSECURELOCK_PASSWORD_PROMPT=disco \
+  XSECURELOCK_IMAGE_DURATION_SECONDS=10 \
+  XSECURELOCK_LIST_VIDEOS_COMMAND='find ~/.background.jpg -type f' \
+  XSECURELOCK_SAVER=saver_mpv \
+  xsecurelock
 bindsym $mod+0 exec --no-startup-id amixer sset 'Master' 10%+
 bindsym $mod+9 exec --no-startup-id amixer sset 'Master' 10%-
 bindsym $mod+Shift+s exec --no-startup-id /opt/muxueqz-sh/steam-input-helper.sh
@@ -218,4 +223,6 @@ bar {
     status_command /data/work/projects/i3status.nelua/myi3_status
     # status_command i3blocks
     position top
+    
+    tray_output primary
 }
