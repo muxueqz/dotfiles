@@ -24,7 +24,7 @@ vim.cmd [[
 --             '--ignore-files',
 --             '--exclude-dir=".git"'
 --           }
-lvim.builtin.telescope.defaults.vimgrep_arguments = {"/opt/muxueqz-sh/vimgrep.lua"}
+lvim.builtin.telescope.defaults.vimgrep_arguments = { "/opt/muxueqz-sh/vimgrep.lua" }
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -34,10 +34,10 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<F5>"] = ":Telescope buffers<cr>"
 lvim.keys.normal_mode["<Leader>bs"] = ":Telescope buffers<cr>"
 lvim.keys.normal_mode["<Leader>gm"] = ":Git commit %<cr>"
-for i=1,9 do
+for i = 1, 9 do
   local key = string.format("<A-%s>", i)
   -- local value = string.format(":BufferGoto %s<CR>" , i)
-  local value = string.format(":BufferLineGoToBuffer %s<CR>" , i)
+  local value = string.format(":BufferLineGoToBuffer %s<CR>", i)
   lvim.keys.normal_mode[key] = value
 end
 -- unmap a default keymapping
@@ -97,8 +97,8 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "java",
   "yaml",
-  "go","vue","javascript","html",
-  "lua","json","bash","c","toml","dockerfile",
+  "go", "vue", "javascript", "html",
+  "lua", "json", "bash", "c", "toml", "dockerfile",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -155,7 +155,7 @@ formatters.setup {
     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
     args = { "--print-with", "100" },
     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    filetypes = { "typescript", "typescriptreact", "javascript"},
+    filetypes = { "typescript", "typescriptreact", "javascript" },
   },
 }
 
@@ -187,9 +187,9 @@ formatters.setup {
 
 local dap = require('dap')
 dap.adapters.go = {
-	type = 'executable';
-	command = '/home/muxueqz/go/bin/dlv';
-	args = {'debug'};
+  type = 'executable';
+  command = '/home/muxueqz/go/bin/dlv';
+  args = { 'debug' };
 }
 require('dap.ext.vscode').load_launchjs()
 
@@ -213,7 +213,7 @@ lvim.plugins = {
       -- vim.g.vim_markdown_new_list_item_indent = 1
     end,
   },
-  {"dkarter/bullets.vim"},
+  { "dkarter/bullets.vim" },
   -- {
   --   'romgrk/barbar.nvim',
   --   requires = {'kyazdani42/nvim-web-devicons'}
@@ -223,19 +223,19 @@ lvim.plugins = {
     ft = "nim",
     config = function()
       vim.g.nvim_nim_enable_default_binds = 0
-      local opts = {cmd={
+      local opts = { cmd = {
         "nimlsp",
         "/data/work/projects/nim-src/",
-      }}
-    -- local opts = {cmd={
-    --     "/dev/shm/temp-workspaces/langserver/nimls",
-    --   }}
-    require("lspconfig")["nimls"].setup(opts)
-    vim.api.nvim_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<cr>", { silent = true })
-    vim.api.nvim_set_keymap("n", "gr", ":lua vim.lsp.buf.references()<cr>", { silent = true })
-    vim.api.nvim_set_keymap("n", "K", ":lua vim.lsp.buf.hover()<cr>", { silent = true })
-    vim.api.nvim_set_keymap("n", "gi", ":lua vim.lsp.buf.implementation()<cr>", { silent = true })
-    -- vim.api.nvim_set_keymap("n", "gr", ":Telescope lsp_references<cr>", { silent = true })
+      } }
+      -- local opts = {cmd={
+      --     "/dev/shm/temp-workspaces/langserver/nimls",
+      --   }}
+      require("lspconfig")["nimls"].setup(opts)
+      vim.api.nvim_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<cr>", { silent = true })
+      vim.api.nvim_set_keymap("n", "gr", ":lua vim.lsp.buf.references()<cr>", { silent = true })
+      vim.api.nvim_set_keymap("n", "K", ":lua vim.lsp.buf.hover()<cr>", { silent = true })
+      vim.api.nvim_set_keymap("n", "gi", ":lua vim.lsp.buf.implementation()<cr>", { silent = true })
+      -- vim.api.nvim_set_keymap("n", "gr", ":Telescope lsp_references<cr>", { silent = true })
     end,
   },
   -- {
@@ -272,9 +272,9 @@ lvim.plugins = {
       vim.g.previm_open_cmd = 'xdg-open'
       vim.g.previm_custom_preview_base_dir = '/dev/shm/previm_cache/'
       vim.api.nvim_set_keymap("n", "<Space>mp", ":PrevimOpen<cr>", { silent = true })
-  --     -- vim.cmd [[
-  --     --   nmap <Space>mp <Plug>MarkdownPreview
-  --     -- ]]
+      --     -- vim.cmd [[
+      --     --   nmap <Space>mp <Plug>MarkdownPreview
+      --     -- ]]
     end,
   },
   -- {
@@ -310,7 +310,7 @@ lvim.plugins = {
       "Glgrep",
       "Gedit"
     },
-    ft = {"fugitive"}
+    ft = { "fugitive" }
   },
   {
     "phaazon/hop.nvim",
@@ -333,6 +333,7 @@ lvim.plugins = {
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
+lvim.autocommands.custom_groups = {
+  --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
+  { "BufNewFile", "*_test.go", "0r ~/workspaces/code-templates/test.go" },
+}
