@@ -1,16 +1,11 @@
 configuration {
 	modi: "Calc:/opt/muxueqz-sh/rofi-calc.sh";
-/*	width: 50;*/
-/*	lines: 15;*/
-/*	columns: 1;*/
-/*	font: "mono 12";*/
-/*	bw: 1;*/
+	font: "mono 16";
 /*	location: 0;*/
-/*	padding: 5;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
-/*	show-icons: false;*/
+	show-icons: true;
 /*	terminal: "rofi-sensible-terminal";*/
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
@@ -20,16 +15,19 @@ configuration {
 /*	window-command: "wmctrl -i -R {window}";*/
 /*	window-match-fields: "all";*/
 /*	icon-theme: ;*/
-/*	drun-match-fields: "name,generic,exec,categories";*/
+/*	drun-match-fields: "name,generic,exec,categories,keywords";*/
+/*	drun-categories: ;*/
 /*	drun-show-actions: false;*/
 /*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
+/*	drun-url-launcher: "xdg-open";*/
 	disable-history: true;
 /*	ignored-prefixes: "";*/
 	sort: true;
-/*	sorting-method: ;*/
+/*	sorting-method: "normal";*/
 /*	case-sensitive: false;*/
 /*	cycle: true;*/
 /*	sidebar-mode: false;*/
+/*	hover-select: false;*/
 /*	eh: 1;*/
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
@@ -38,29 +36,23 @@ configuration {
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/
-/*	line-margin: 2;*/
-/*	line-padding: 1;*/
 /*	filter: ;*/
-/*	separator-style: "dash";*/
-/*	hide-scrollbar: false;*/
-/*	fullscreen: false;*/
-/*	fake-transparency: false;*/
 /*	dpi: -1;*/
 /*	threads: 0;*/
-/*	scrollbar-width: 8;*/
 /*	scroll-method: 0;*/
-/*	fake-background: "screenshot";*/
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
-/*	show-match: true;*/
-/*	color-normal: ;*/
-/*	color-urgent: ;*/
-/*	color-active: ;*/
-/*	color-window: ;*/
+/*	theme: ;*/
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
 /*	matching-negate-char: '-' /* unsupported */;*/
 /*	cache-dir: ;*/
+/*	window-thumbnail: false;*/
+/*	drun-use-desktop-cache: false;*/
+/*	drun-reload-desktop-cache: false;*/
+/*	normalize-match: false;*/
+/*	steal-focus: false;*/
+	application-fallback-icon: "shellscript";
 /*	pid: "/run/user/1000/rofi.pid";*/
 /*	display-window: ;*/
 /*	display-windowcd: ;*/
@@ -69,6 +61,7 @@ configuration {
 /*	display-drun: ;*/
 /*	display-combi: ;*/
 /*	display-keys: ;*/
+/*	display-filebrowser: ;*/
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/
 /*	kb-secondary-paste: "Control+v,Insert";*/
 /*	kb-clear-line: "Control+w";*/
@@ -86,10 +79,12 @@ configuration {
 /*	kb-remove-to-sol: "Control+u";*/
 /*	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";*/
 /*	kb-accept-custom: "Control+Return";*/
+/*	kb-accept-custom-alt: "Control+Shift+Return";*/
 /*	kb-accept-alt: "Shift+Return";*/
 /*	kb-delete-entry: "Shift+Delete";*/
 /*	kb-mode-next: "Shift+Right,Control+Tab";*/
 /*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
+/*	kb-mode-complete: "Control+l";*/
 /*	kb-row-left: "Control+Page_Up";*/
 /*	kb-row-right: "Control+Page_Down";*/
 /*	kb-row-up: "Up,Control+p,ISO_Left_Tab";*/
@@ -141,129 +136,24 @@ configuration {
 /*	me-select-entry: "MousePrimary";*/
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
+/*	display-Calc: ;*/
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
+  show {
+      icons: "-show";
+  }
+  application {
+      fallback-icon: "shellscript";
+  }
 }
-/* @theme: "./theme.rasi" */
-
-/* @theme "solarized" */
-/*Dracula theme based on the Purple official rofi theme*/
-
-* {
-    font: "Jetbrains Mono 16";
-    foreground: #f8f8f2;
-    background: #282a36;
-    active-background: #6272a4;
-    urgent-background: #ff5555;
-    selected-background: @active-background;
-    selected-urgent-background: @urgent-background;
-    selected-active-background: @active-background;
-    separatorcolor: @active-background;
-    bordercolor: @active-background;
-}
-
-#window {
-    background-color: @background;
-    border:           1;
-    border-radius: 6;
-    border-color: @bordercolor;
-    padding:          5;
-}
-#mainbox {
-    border:  0;
-    padding: 0;
-}
-#message {
-    border:       1px dash 0px 0px ;
-    border-color: @separatorcolor;
-    padding:      1px ;
-}
-#textbox {
-    text-color: @foreground;
-}
-#listview {
-    fixed-height: 0;
-    border:       2px dash 0px 0px ;
-    border-color: @bordercolor;
-    spacing:      2px ;
-    scrollbar:    false;
-    padding:      2px 0px 0px ;
-}
-#element {
-    border:  0;
-    padding: 1px ;
-}
-#element.normal.normal {
-    background-color: @background;
-    text-color:       @foreground;
-}
-#element.normal.urgent {
-    background-color: @urgent-background;
-    text-color:       @urgent-foreground;
-}
-#element.normal.active {
-    background-color: @active-background;
-    text-color:       @foreground;
-}
-#element.selected.normal {
-    background-color: @selected-background;
-    text-color:       @foreground;
-}
-#element.selected.urgent {
-    background-color: @selected-urgent-background;
-    text-color:       @foreground;
-}
-#element.selected.active {
-    background-color: @selected-active-background;
-    text-color:       @foreground;
-}
-#element.alternate.normal {
-    background-color: @background;
-    text-color:       @foreground;
-}
-#element.alternate.urgent {
-    background-color: @urgent-background;
-    text-color:       @foreground;
-}
-#element.alternate.active {
-    background-color: @active-background;
-    text-color:       @foreground;
-}
-#scrollbar {
-    width:        2px ;
-    border:       0;
-    handle-width: 8px ;
-    padding:      0;
-}
-#sidebar {
-    border:       2px dash 0px 0px ;
-    border-color: @separatorcolor;
-}
-#button.selected {
-    background-color: @selected-background;
-    text-color:       @foreground;
-}
-#inputbar {
-    spacing:    0;
-    text-color: @foreground;
-    padding:    1px ;
-}
-#case-indicator {
-    spacing:    0;
-    text-color: @foreground;
-}
-#entry {
-    spacing:    0;
-    text-color: @foreground;
-}
-#prompt {
-    spacing:    0;
-    text-color: @foreground;
-}
-#inputbar {
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
-}
-#textbox-prompt-colon {
-    expand:     false;
-    str:        ":";
-    margin:     0px 0.3em 0em 0em ;
-    text-color: @foreground;
+@theme "/home/muxueqz/.config/rofi/themes/dracula.rasi"
+element-icon {
+ /* size: 1.65ch ; */
+ size: 2.35ch ;
 }
