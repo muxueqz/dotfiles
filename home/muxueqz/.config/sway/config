@@ -54,7 +54,7 @@ bindsym $mod+x kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+p exec --no-startup-id rofi -show run
+bindsym $mod+p exec --no-startup-id wofi --show run
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -97,7 +97,7 @@ bindsym $mod+v split v
 bindsym $mod+F11 fullscreen toggle
 bindsym $mod+F8 exec --no-startup-id sudo /usr/bin/brightness-set down
 bindsym $mod+F9 exec --no-startup-id sudo /usr/bin/brightness-set up
-bindsym $mod+Shift+Delete --release exec --no-startup-id swaylock -i /home/muxueqz/.background.jpg
+bindsym $mod+Shift+Delete exec --no-startup-id swaylock -i $HOME/.background.jpg
 bindsym $mod+0 exec --no-startup-id amixer sset 'Master' 10%+
 bindsym $mod+9 exec --no-startup-id amixer sset 'Master' 10%-
 bindsym $mod+Shift+s exec --no-startup-id /opt/muxueqz-sh/steam-input-helper.sh
