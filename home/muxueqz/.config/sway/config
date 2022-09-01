@@ -113,8 +113,12 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+t floating toggle
 
-bindsym $mod+f exec --no-startup-id rofi -show windowcd
-bindsym $mod+Shift+f exec --no-startup-id rofi -show window
+# bindsym $mod+f exec --no-startup-id rofi -show windowcd
+bindsym $mod+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py current_workspace \
+  | wofi --show dmenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
+bindsym $mod+Shift+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py \
+  | wofi --show dmenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
+# bindsym $mod+Shift+f exec --no-startup-id rofi -show window
 
 bindsym $mod+w move scratchpad
 
