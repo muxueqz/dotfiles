@@ -57,7 +57,7 @@ bindsym $mod+x kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+p exec --no-startup-id wofi --show run
+bindsym $mod+p exec --no-startup-id rofi -show run
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -118,10 +118,12 @@ bindsym $mod+t floating toggle
 
 # bindsym $mod+f exec --no-startup-id rofi -show windowcd
 bindsym $mod+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py current_workspace \
-  | wofi --show dmenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
-bindsym $mod+Shift+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py \
-  | wofi --show dmenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
-# bindsym $mod+Shift+f exec --no-startup-id rofi -show window
+  | rofi -dmenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
+# bindsym $mod+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py current_workspace \
+#   | rofi --show dmenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
+# bindsym $mod+Shift+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py \
+#   | rofi --show dmenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
+bindsym $mod+Shift+f exec --no-startup-id rofi -show window
 
 bindsym $mod+w move scratchpad
 
