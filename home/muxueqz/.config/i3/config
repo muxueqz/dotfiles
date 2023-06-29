@@ -62,8 +62,10 @@ bindsym $mod+p exec --no-startup-id rofi -show run
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus next
-bindsym $mod+k focus prev
+bindsym $mod+j exec --no-startup-id sh -c 'i3-msg -t get_tree | python3 $HOME/.config/i3/window_tools.py next \
+  | ( read -r id name && i3-msg "[con_id=$id]" focus )'
+bindsym $mod+k exec --no-startup-id sh -c 'i3-msg -t get_tree | python3 $HOME/.config/i3/window_tools.py prev \
+  | ( read -r id name && i3-msg "[con_id=$id]" focus )'
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
