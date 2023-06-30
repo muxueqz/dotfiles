@@ -70,10 +70,10 @@ if __name__ == "__main__":
             print(f"{r[0]['id']} {r[0]['name']}")
             exit()
 
-        window_opts = {"prev": -1, "next": 1}
+        window_opts = 1 if sys.argv[1] == "next" else -1
         focused_window = next(
             (i for i, window in enumerate(r) if window.get("focused")), 0
         )
-        next_index = (focused_window + 1) % len(r)
+        next_index = (focused_window + window_opts) % len(r)
         i = r[next_index]
         print(f"{i['id']} {i['name']}")
