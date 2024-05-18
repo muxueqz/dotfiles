@@ -33,7 +33,7 @@ hide_edge_borders smart
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec_always --no-startup-id ~/.config/qtile/autostart.sh
+exec_always --no-startup-id ~/.config/i3/autostart.sh
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -217,7 +217,8 @@ bar {
     # status_command i3status
     # status_command /dev/shm/temp-workspaces/i3pystatus/bin/i3pystatus -c /dev/shm/temp-workspaces/i3pystatus_cfg.py
     # status_command python3 /opt/muxueqz-py/myi3_status.py
-    status_command /data/work/projects/i3status.nelua/myi3_status
+    # status_command /data/work/projects/i3status.nelua/myi3_status
+    status_command /data/work/projects/i3status.nim/myi3_status
     # status_command i3blocks
     position top
     
