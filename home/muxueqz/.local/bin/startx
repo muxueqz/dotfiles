@@ -1,0 +1,3 @@
+#!/bin/sh
+export XAUTHORITY=$HOME/.Xauthority
+sx sh $HOME/.xinitrc
