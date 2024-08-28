@@ -3,7 +3,6 @@
 source /data/encfs/cfg/173bashrc
 source ~/.asdf/asdf.sh
 
-
 export HISTCONTROL=ignoredups:erasedups
 export EDITOR=~/.local/bin/lvim
 
@@ -14,6 +13,11 @@ export GTK_IM_MODULE=fcitx
 #export XMODIFIERS="@im=ibus"
 #export QT_IM_MODULE=ibus
 #export GTK_IM_MODULE=ibus
+#
+# export XMODIFIERS="@im=nimf"
+# export QT_IM_MODULE=nimf
+# export QT4_IM_MODULE=nimf
+# export GTK_IM_MODULE=nimf
 
 export JAVA_HOME=/opt/jre
 export PATH=$HOME/.asdf/shims_faster/:$HOME/.local/bin/:$PATH:/sbin:/usr/sbin:$HOME/bin:/opt/muxueqz-sh/:/opt/muxueqz-py:$JAVA_HOME/bin:/opt/Palm/novacom/:/home/muxueqz/.nimble/bin/:/data/work/project/node/bin/
@@ -23,6 +27,7 @@ export PAGER='less'
 export MANPAGER='vim -u /usr/share/nvim/runtime/macros/less.vim -c "noremap gg :1<CR>" +Man!'
 export GOTMPDIR=/tmp/build-tmps/
 export CM_LAUNCHER=~/.local/bin/clipmenu-launcher
+export CM_OUTPUT_CLIP=true
 
 #alias bjovpn='sudo ifconfig eth0 down; sudo pkill dhclient; sudo ifconfig eth0 10.200.4.150 up ;sudo route add default gw 10.200.6.201; cd /media/ext4/update/openvpn/xlqy-vpn/;sudo openvpn --config X100-OpenVPN.ovpn --http-proxy 10.200.2.0 8080 --redirect-gateway;cd -'
 alias ls='ls --color=auto'
@@ -77,8 +82,8 @@ alias bp_gitclone='git clone -c user.email=mingyuan.zhang@bespinglobal.cn -c use
 alias weekly-report='python /opt/muxueqz-py/github_weekly.py'
 alias switch-edp-dispaly='xrandr --output eDP-1 --auto --mode 1600x900 '
 
-workon (){
- cd ~/workspaces/$1
+workon() {
+	cd ~/workspaces/$1
 }
 
 alias vim-notmp='firejail --env=PATH=/data/work/project/x-apps-in-container/vbin/:$PATH \
@@ -90,226 +95,226 @@ alias vim='vim-notmp'
 alias vimdiff='vim -d'
 alias vi='vim'
 alias docker=podman
+alias mvi='mpv --config-dir=$HOME/.config/mpv-image-viewer/'
+alias gpicview=mvi
 
-ipydb (){
- export NLS_LANG='SIMPLIFIED CHINESE_CHINA.UTF8'
- export ORACLE_HOME=/data/work/project/oci_12_1/
- export LD_LIBRARY_PATH=$ORACLE_HOME
- /data/work/project/ipydb_venv/bin/ipython --profile=ipydb
+ipydb() {
+	export NLS_LANG='SIMPLIFIED CHINESE_CHINA.UTF8'
+	export ORACLE_HOME=/data/work/project/oci_12_1/
+	export LD_LIBRARY_PATH=$ORACLE_HOME
+	/data/work/project/ipydb_venv/bin/ipython --profile=ipydb
 }
 
-ipv6-pac-update (){
+ipv6-pac-update() {
 	wget http://gfw-proxy.co.cc/proxy.pac
 }
 
-allmount (){
+allmount() {
 	sudo echo starting...
 	cd /dev
-	for s in sd{b,c}{1..13};do 
-		[[ -e "$s" ]] && \
-		sudo mkdir -p /media/$s && \
-		sudo mount $s /media/$s;done # 1> /dev/null 2>&1
+	for s in sd{b,c}{1..13}; do
+		[[ -e "$s" ]] &&
+			sudo mkdir -p /media/$s &&
+			sudo mount $s /media/$s
+	done # 1> /dev/null 2>&1
 	cd -
-	}
-gapclient () {
+}
+gapclient() {
 	cd /data/work/code/py/gapproxy-client-2.0.0/
 	python proxy.py
-	}
+}
 
 # alias set_proxy="export http_proxy='http://127.0.0.1:11082' ; export https_proxy=\$http_proxy"
 set-proxy() {
-  if [[ -z $1 ]] ; then
-    export http_proxy="http://default-proxy-server:11082"
-  else
-    export http_proxy="http://${1}"
-  fi
-  echo $http_proxy
-  export https_proxy=$http_proxy
+	if [[ -z $1 ]]; then
+		export http_proxy="http://default-proxy-server:11082"
+	else
+		export http_proxy="http://${1}"
+	fi
+	echo $http_proxy
+	export https_proxy=$http_proxy
 }
 
 alias unset-proxy="unset http_proxy; unset https_proxy"
 
-mksniso (){
-    sudo mkisofs -r -T -J -V “bjsn” -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $1 $PWD
+mksniso() {
+	sudo mkisofs -r -T -J -V “bjsn” -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $1 $PWD
 }
 
-xsj_ovpn (){
-    TMP_DIR=`mktemp -d`
-    rsync -av --progress /data/encfs/cfg/xsj_vpn/YWvpn/ ${TMP_DIR}
-    sudo chown -R root ${TMP_DIR}
-    sudo chmod -R 550 ${TMP_DIR}
-    cd ${TMP_DIR}
-    sudo openvpn --config client.ovpn --daemon --route-nopull --route 172.30.0.73
-    sudo rm -rf ${TMP_DIR}
-    cd -
+xsj_ovpn() {
+	TMP_DIR=$(mktemp -d)
+	rsync -av --progress /data/encfs/cfg/xsj_vpn/YWvpn/ ${TMP_DIR}
+	sudo chown -R root ${TMP_DIR}
+	sudo chmod -R 550 ${TMP_DIR}
+	cd ${TMP_DIR}
+	sudo openvpn --config client.ovpn --daemon --route-nopull --route 172.30.0.73
+	sudo rm -rf ${TMP_DIR}
+	cd -
 }
 
-docker_portmapping (){
-container_name=$1
-src_port=$2
-dst_port=$3
+docker_portmapping() {
+	container_name=$1
+	src_port=$2
+	dst_port=$3
 
-ip_addr=`docker inspect ${container_name}| grep '"IPAddress"' | sed 's/"//'g| cut -d':' -f2 | cut -d',' -f1`
-sudo iptables -t nat -A  DOCKER -p tcp --dport ${dst_port} -j DNAT --to-destination ${ip_addr}:${src_port}
+	ip_addr=$(docker inspect ${container_name} | grep '"IPAddress"' | sed 's/"//'g | cut -d':' -f2 | cut -d',' -f1)
+	sudo iptables -t nat -A DOCKER -p tcp --dport ${dst_port} -j DNAT --to-destination ${ip_addr}:${src_port}
 }
 
-7zcat (){
-#PATH=${GZIP_BINDIR-'/bin'}:$PATH
-exec 7z e -so -bd "$@" 2>/dev/null | cat
+7zcat() {
+	#PATH=${GZIP_BINDIR-'/bin'}:$PATH
+	exec 7z e -so -bd "$@" 2>/dev/null | cat
 }
-monster_publish (){
-pkg_ver=$1
-export version=${pkg_ver}
-export prev_version=$2
-source /data/work/project/mosclient_venv/monster_auto_update.sh
-source /data/work/project/mosclient_venv/bin/activate
+monster_publish() {
+	pkg_ver=$1
+	export version=${pkg_ver}
+	export prev_version=$2
+	source /data/work/project/mosclient_venv/monster_auto_update.sh
+	source /data/work/project/mosclient_venv/bin/activate
 
-bash scripts/make_package.sh
-#Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster_norepos-${pkg_ver}.tar.gz && exit"
-#Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster_update-${pkg_ver}.tar.gz && exit"
-##Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster-${pkg_ver}.tar.gz && exit"
-bypy mkdir ${pkg_ver}
-for i in /data/vm/make_docker/monster*${pkg_ver}.tar.gz ;do 
- echo $i ;
- bypy upload $i ${pkg_ver};
-done
-#Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster-${pkg_ver}.tar.gz && exit"
-unset version prev_version
+	bash scripts/make_package.sh
+	#Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster_norepos-${pkg_ver}.tar.gz && exit"
+	#Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster_update-${pkg_ver}.tar.gz && exit"
+	##Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster-${pkg_ver}.tar.gz && exit"
+	bypy mkdir ${pkg_ver}
+	for i in /data/vm/make_docker/monster*${pkg_ver}.tar.gz; do
+		echo $i
+		bypy upload $i ${pkg_ver}
+	done
+	#Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster-${pkg_ver}.tar.gz && exit"
+	unset version prev_version
 }
 
-monster_agent_publish (){
-export pkg_ver=$1
-export version=${pkg_ver}
-bash pkgs/make_package.sh
-Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster_agent_go-${pkg_ver}.tar.gz && exit"
-unset version pkg_ver
+monster_agent_publish() {
+	export pkg_ver=$1
+	export version=${pkg_ver}
+	bash pkgs/make_package.sh
+	Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster_agent_go-${pkg_ver}.tar.gz && exit"
+	unset version pkg_ver
 }
 
 kvm-temp-vm() {
-    sudo qemu-system-x86_64 -enable-kvm -m 512 $1 -snapshot -net nic,model=virtio -net bridge,br=docker0 -cdrom /data/iso/rhel-server-6.4-x86_64-dvd.iso
+	sudo qemu-system-x86_64 -enable-kvm -m 512 $1 -snapshot -net nic,model=virtio -net bridge,br=docker0 -cdrom /data/iso/rhel-server-6.4-x86_64-dvd.iso
 }
 
-function log2syslog
-{
-   declare command
-   command=$(fc -ln -0)
-   logger -p local1.notice -t bash -i — $USER : "$command"
+function log2syslog {
+	declare command
+	command=$(fc -ln -0)
+	logger -p local1.notice -t bash -i — $USER : "$command"
 }
 trap log2syslog DEBUG
 
-_filedir () 
-{ 
-    local IFS='
-';
-    _tilde "$cur" || return;
-    local -a toks;
-    local reset;
-    if [[ "$1" == -d ]]; then
-        reset=$(shopt -po noglob);
-        set -o noglob;
-        toks=($(compgen -d -- "$cur"));
-        IFS=' ';
-        $reset;
-        IFS='
-';
-    else
-        local quoted;
-        _quote_readline_by_ref "$cur" quoted;
-        local xspec=${1:+"!*.@($1|${1^^})"} plusdirs=();
-        local opts=(-f -X "$xspec");
-        [[ -n $xspec ]] && plusdirs=(-o plusdirs);
-        [[ -n ${COMP_FILEDIR_FALLBACK-} ]] || opts+=("${plusdirs[@]}");
-        reset=$(shopt -po noglob);
-        set -o noglob;
-        toks+=($(compgen "${opts[@]}" -- $quoted));
-        IFS=' ';
-        $reset;
-        IFS='
-';
-        [[ -n ${COMP_FILEDIR_FALLBACK:-} && -n "$1" && ${#toks[@]} -lt 1 ]] && { 
-            reset=$(shopt -po noglob);
-            set -o noglob;
-            toks+=($(compgen -f "${plusdirs[@]}" -- $quoted));
-            IFS=' ';
-            $reset;
-            IFS='
+_filedir() {
+	local IFS='
 '
-        };
-    fi;
-    if [[ ${#toks[@]} -ne 0 ]]; then
-        compopt -o filenames 2> /dev/null;
-        COMPREPLY+=("${toks[@]}");
-    fi
-    if [[ "${cur::1}" == "~" ]] ; then
-      cur=$(echo "$cur" | sed "s#^~#$HOME#g")
-    fi
-    chs=($(/data/work/project/bash-completion-pinyin.nim/chsdir "x$1" "$cur" ))
-    if (( $COMP_TYPE == 63 )); then
-      # COMPREPLY=( "${toks[@]}" "${chs[@]}" )
-      COMPREPLY=( "${chs[@]}" )
-      if (( ${#chs[@]} == 0 )); then
-        COMPREPLY=( "${toks[@]}" )
-      fi
-    elif (( $COMP_TYPE == 9 )); then
-      local first_neq first_word
-      first_word=${chs[0]::1}
-      first_neq=0
-      for key in "${!chs[@]}";do
-        [[ ${chs[$key]::1} != $first_word ]] && first_neq=1
-      done
-      if (( ${#chs[@]} == 1 )); then
-        COMPREPLY=( "${chs[@]}" )
-      elif (( ${#chs[@]} == 0 )); then
-        COMPREPLY=( "${toks[@]}" )
-      elif (( $first_neq == 0 )); then
-        COMPREPLY=( "${chs[@]}" )
-     else
-       unset COMPREPLY
-      fi
-    fi
+	_tilde "$cur" || return
+	local -a toks
+	local reset
+	if [[ "$1" == -d ]]; then
+		reset=$(shopt -po noglob)
+		set -o noglob
+		toks=($(compgen -d -- "$cur"))
+		IFS=' '
+		$reset
+		IFS='
+'
+	else
+		local quoted
+		_quote_readline_by_ref "$cur" quoted
+		local xspec=${1:+"!*.@($1|${1^^})"} plusdirs=()
+		local opts=(-f -X "$xspec")
+		[[ -n $xspec ]] && plusdirs=(-o plusdirs)
+		[[ -n ${COMP_FILEDIR_FALLBACK-} ]] || opts+=("${plusdirs[@]}")
+		reset=$(shopt -po noglob)
+		set -o noglob
+		toks+=($(compgen "${opts[@]}" -- $quoted))
+		IFS=' '
+		$reset
+		IFS='
+'
+		[[ -n ${COMP_FILEDIR_FALLBACK:-} && -n "$1" && ${#toks[@]} -lt 1 ]] && {
+			reset=$(shopt -po noglob)
+			set -o noglob
+			toks+=($(compgen -f "${plusdirs[@]}" -- $quoted))
+			IFS=' '
+			$reset
+			IFS='
+'
+		}
+	fi
+	if [[ ${#toks[@]} -ne 0 ]]; then
+		compopt -o filenames 2>/dev/null
+		COMPREPLY+=("${toks[@]}")
+	fi
+	if [[ "${cur::1}" == "~" ]]; then
+		cur=$(echo "$cur" | sed "s#^~#$HOME#g")
+	fi
+	chs=($(/data/work/project/bash-completion-pinyin.nim/chsdir "x$1" "$cur"))
+	if (($COMP_TYPE == 63)); then
+		# COMPREPLY=( "${toks[@]}" "${chs[@]}" )
+		COMPREPLY=("${chs[@]}")
+		if ((${#chs[@]} == 0)); then
+			COMPREPLY=("${toks[@]}")
+		fi
+	elif (($COMP_TYPE == 9)); then
+		local first_neq first_word
+		first_word=${chs[0]::1}
+		first_neq=0
+		for key in "${!chs[@]}"; do
+			[[ ${chs[$key]::1} != $first_word ]] && first_neq=1
+		done
+		if ((${#chs[@]} == 1)); then
+			COMPREPLY=("${chs[@]}")
+		elif ((${#chs[@]} == 0)); then
+			COMPREPLY=("${toks[@]}")
+		elif (($first_neq == 0)); then
+			COMPREPLY=("${chs[@]}")
+		else
+			unset COMPREPLY
+		fi
+	fi
 }
 
 steam_start() {
-  udisksctl mount --block-device /dev/disk/by-label/usb_data
-  # cd /media/muxueqz/usb_data/steam_env/
-  # [[ ! -d rootfs/tmp/ ]] && sudo mount -t overlay overlay -olowerdir=/,upperdir=upperdir/,workdir=workdir/ rootfs/
-  bash -x /data/work/project/firejail-profiles/steam-in-nspawn.sh 
+	udisksctl mount --block-device /dev/disk/by-label/usb_data
+	# cd /media/muxueqz/usb_data/steam_env/
+	# [[ ! -d rootfs/tmp/ ]] && sudo mount -t overlay overlay -olowerdir=/,upperdir=upperdir/,workdir=workdir/ rootfs/
+	bash -x /data/work/project/firejail-profiles/steam-in-nspawn.sh
 }
 
 steam_stop() {
-  cd ~
-  sudo umount /media/muxueqz/usb_data/steam_env/rootfs
-  udisksctl unmount --block-device /dev/disk/by-label/usb_data
-  disk_id=$(readlink /dev/disk/by-label/usb_data | xargs basename  | grep -o '[a-z]*')
-  udisksctl power-off  --block-device /dev/${disk_id}
+	cd ~
+	sudo umount /media/muxueqz/usb_data/steam_env/rootfs
+	udisksctl unmount --block-device /dev/disk/by-label/usb_data
+	disk_id=$(readlink /dev/disk/by-label/usb_data | xargs basename | grep -o '[a-z]*')
+	udisksctl power-off --block-device /dev/${disk_id}
 }
 
 temp-workspaces() {
-  mkdir -pv /dev/shm/temp-workspaces/
-  cd /dev/shm/temp-workspaces/
+	mkdir -pv /dev/shm/temp-workspaces/
+	cd /dev/shm/temp-workspaces/
 }
 alias tw=temp-workspaces
 
-parse_git_branch () 
-{ 
-    local readonly GIT_SEPARATOR='';
-    local readonly INFO_FG='\033[0;34m';
-    local readonly SUCCESS_FG="\033[0;12m";
-    local readonly COMMON_INV_FG="\033[0;30m";
-    local readonly COMMON_LIGHT_FG="\033[0;36m";
-    local readonly SUCCESS_BG="\033[46m";
-    local readonly COMMON_BG="\033[40m";
-    local readonly RESET='\033[0m';
-    local consoleBackColor="$COMMON_BG";
-    local consoleColor="$COMMON_INV_FG";
-    local branchBackColor="$SUCCESS_BG";
-    local branchColor="$SUCCESS_FG";
-    local branch=$(git branch --show-current 2>/dev/null);
-    if [[ ${branch} != '' ]]; then
-        echo -e "$INFO_FG$branchBackColor$GIT_SEPARATOR$branchColor$branchBackColor${branch}$COMMON_LIGHT_FG$consoleBackColor$GIT_SEPARATOR$RESET";
-    else
-        echo -e "$INFO_FG$consoleBackColor$GIT_SEPARATOR$RESET";
-    fi
+parse_git_branch() {
+	local readonly GIT_SEPARATOR=''
+	local readonly INFO_FG='\033[0;34m'
+	local readonly SUCCESS_FG="\033[0;12m"
+	local readonly COMMON_INV_FG="\033[0;30m"
+	local readonly COMMON_LIGHT_FG="\033[0;36m"
+	local readonly SUCCESS_BG="\033[46m"
+	local readonly COMMON_BG="\033[40m"
+	local readonly RESET='\033[0m'
+	local consoleBackColor="$COMMON_BG"
+	local consoleColor="$COMMON_INV_FG"
+	local branchBackColor="$SUCCESS_BG"
+	local branchColor="$SUCCESS_FG"
+	local branch=$(git branch --show-current 2>/dev/null)
+	if [[ ${branch} != '' ]]; then
+		echo -e "$INFO_FG$branchBackColor$GIT_SEPARATOR$branchColor$branchBackColor${branch}$COMMON_LIGHT_FG$consoleBackColor$GIT_SEPARATOR$RESET"
+	else
+		echo -e "$INFO_FG$consoleBackColor$GIT_SEPARATOR$RESET"
+	fi
 }
 # from miniline.sh
 # export PS1='\[\033[44m\]\[\033[1;37m\] \w \[\033[0m\]`parse_git_branch`\[\033[40m\]\[\033[1;37m\] \$ \[\033[40m\]\[\033[0;30m\]\[\033[0m\] '
