@@ -1,0 +1,2 @@
+#!/bin/sh
+polipo logFile=/dev/stdout diskCacheRoot=$PWD/polipo-cache cacheIsShared=True
