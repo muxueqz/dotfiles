@@ -1,2 +1,5 @@
 #!/bin/sh
-polipo logFile=/dev/stdout diskCacheRoot=$PWD/polipo-cache cacheIsShared=True
+polipo logFile=/dev/stdout \
+  diskCacheRoot=$PWD/polipo-cache cacheIsShared=True \
+  proxyAddress="::0"
+
