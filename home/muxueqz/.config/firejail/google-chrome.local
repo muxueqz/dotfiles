@@ -3,6 +3,8 @@ dbus-user.talk org.freedesktop.Notifications
 
 dbus-user.talk org.freedesktop.portal.Fcitx
 
+dbus-user.talk org.freedesktop.portal.Desktop
+
 # ignore dbus-user none
 
 noblacklist ${HOME}/.kingsoft

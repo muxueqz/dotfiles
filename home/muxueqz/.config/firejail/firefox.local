@@ -5,6 +5,7 @@ dbus-user.own org.mpris.MediaPlayer2.firefox.*
 dbus-user.talk org.freedesktop.Notifications
 
 dbus-user.talk org.freedesktop.portal.Fcitx
+dbus-user.talk org.freedesktop.portal.Desktop
 
 ignore dbus-user none
 
