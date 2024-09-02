@@ -52,7 +52,7 @@ floating_modifier $mod
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec foot
-bindsym $mod+Shift+Return exec xterm
+bindsym $mod+Shift+Return exec /usr/bin/x-terminal-emulator
 
 # kill focused window
 bindsym $mod+x kill
@@ -120,11 +120,11 @@ bindsym $mod+t floating toggle
 
 # bindsym $mod+f exec --no-startup-id rofi -show windowcd
 bindsym $mod+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py current_workspace \
-  | rofi -p "Window" -dmenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
+  | ymenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
 # bindsym $mod+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py current_workspace \
 #   | rofi --show dmenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
 bindsym $mod+Shift+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py \
-  | rofi -p "Window" -dmenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
+  | ymenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
 # bindsym $mod+Shift+f exec --no-startup-id rofi -show window
 
 bindsym $mod+w move scratchpad
