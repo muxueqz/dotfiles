@@ -11,7 +11,7 @@ def extract_nodes_iterative(workspace):
     floating_nodes = workspace.get('floating_nodes')
 
     for floating_node in floating_nodes:
-        floating_node['workspace'] = workspace['num']
+        floating_node['workspace'] = workspace.get('num', -9999)
         all_nodes.append(floating_node)
 
     nodes = workspace.get('nodes')
@@ -43,7 +43,8 @@ def get_windows(only_workspace=False):
     for output in data['nodes']:
 
         # The scratchpad (under __i3) is not supported
-        if output.get('name') != '__i3' and output.get('type') == 'output':
+        # if output.get('name') != '__i3' and output.get('type') == 'output':
+        if output.get('type') == 'output':
             workspaces = output.get('nodes')
             for workspace in workspaces:
                 if workspace.get('type') == 'workspace':

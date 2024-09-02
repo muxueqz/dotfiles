@@ -39,6 +39,7 @@ read-only ${HOME}/.config/fcitx
 
 whitelist ${HOME}/.config/google-chrome-extensions
 read-only ${HOME}/.config/google-chrome-extensions
+whitelist /data/work/projects/firefox
 
 read-only /etc/passwd
 read-only ${RUNUSER}/bus
