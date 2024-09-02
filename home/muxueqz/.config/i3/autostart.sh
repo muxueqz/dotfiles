@@ -1,6 +1,7 @@
 #!/bin/sh
 #fcitx
 fcitx5 -d
+# nimf
 #clipit &
 
 cd /data/work/project/clipmenu/
