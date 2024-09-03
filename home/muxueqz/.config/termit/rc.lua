@@ -74,6 +74,8 @@ bindKey('Ctrl-t', nil) -- remove previous binding
 -- -- don't close tab with Ctrl-w, use CtrlShift-w
 -- bindKey('Ctrl-w', nil)
 -- bindKey('CtrlShift-w', closeTab)
+bindKey('CtrlShift-c', copy)
+bindKey('CtrlShift-v', paste)
 --
 setKbPolicy("keycode")
 
