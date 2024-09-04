@@ -66,5 +66,5 @@ if __name__ == "__main__":
     except Exception as e:
         pass
     r = get_windows(only_workspace)
-    for i in r:
-        print('%s %s' % (i['id'], i['name']))
+    for n, i in enumerate(r):
+        print(f"{n+1}. {i['id']} {i['name']}")

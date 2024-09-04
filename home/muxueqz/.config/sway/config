@@ -98,9 +98,10 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+F11 fullscreen toggle
-bindsym $mod+F8 exec --no-startup-id sudo /usr/bin/brightness-set down
-bindsym $mod+F9 exec --no-startup-id sudo /usr/bin/brightness-set up
-bindsym $mod+Shift+Delete exec --no-startup-id swaylock -i $HOME/.background.jpg
+bindsym $mod+F8 exec --no-startup-id sudo /opt/libexec/brightness-set down
+bindsym $mod+F9 exec --no-startup-id sudo /opt/libexec/brightness-set up
+# bindsym $mod+Shift+Delete exec --no-startup-id swaylock -i $HOME/.background.jpg
+bindsym $mod+Shift+Delete exec --no-startup-id sudo /opt/libexec/swaylock-with-idle.sh -i $HOME/.background.jpg
 bindsym $mod+0 exec --no-startup-id amixer sset 'Master' 10%+
 bindsym $mod+9 exec --no-startup-id amixer sset 'Master' 10%-
 bindsym $mod+Shift+s exec --no-startup-id /opt/muxueqz-sh/steam-input-helper.sh
@@ -118,11 +119,11 @@ bindsym $mod+t floating toggle
 
 # bindsym $mod+f exec --no-startup-id rofi -show windowcd
 bindsym $mod+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py current_workspace \
-  | ymenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
+  | ymenu | ( read -r num id name  ; swaymsg "[con_id=$id]" focus )'
 # bindsym $mod+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py current_workspace \
 #   | rofi --show dmenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
 bindsym $mod+Shift+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py \
-  | ymenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
+  | ymenu | ( read -r num id name  ; swaymsg "[con_id=$id]" focus )'
 # bindsym $mod+Shift+f exec --no-startup-id rofi -show window
 
 bindsym $mod+w move scratchpad
