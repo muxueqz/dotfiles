@@ -1,6 +1,6 @@
-sudo id
+#!/bin/sh
 touch /tmp/last_input_time
-sudo sh -c "I3SOCK=$I3SOCK bash /opt/libexec/swayidle.sh" &
+sudo /opt/libexec/swayidle.sh &
 swaylock $@
 
 for i in $(seq 10); do
