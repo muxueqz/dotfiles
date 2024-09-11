@@ -15,7 +15,6 @@ set $mod Mod4
 #Alt Key
 # set $mod Mod1
 output * bg ~/.background.jpg fill
-include /run/user/1000/sway-config-device
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -100,8 +99,7 @@ bindsym $mod+v split v
 bindsym $mod+F11 fullscreen toggle
 bindsym $mod+F8 exec --no-startup-id sudo /opt/libexec/brightness-set down
 bindsym $mod+F9 exec --no-startup-id sudo /opt/libexec/brightness-set up
-# bindsym $mod+Shift+Delete exec --no-startup-id swaylock -i $HOME/.background.jpg
-bindsym $mod+Shift+Delete exec --no-startup-id sudo /opt/libexec/swaylock-with-idle.sh -i $HOME/.background.jpg
+bindsym $mod+Shift+Delete exec --no-startup-id ~/.config/sway/swaylock-with-idle.sh -i $HOME/.background.jpg
 bindsym $mod+0 exec --no-startup-id amixer sset 'Master' 10%+
 bindsym $mod+9 exec --no-startup-id amixer sset 'Master' 10%-
 bindsym $mod+Shift+s exec --no-startup-id /opt/muxueqz-sh/steam-input-helper.sh
@@ -227,7 +225,6 @@ bar {
     # status_command python3 /opt/muxueqz-py/myi3_status.py
     # status_command exec /data/work/projects/i3status.nelua/myi3_status
     status_command /data/work/projects/i3status.nim/myi3_status
-    # status_command i3blocks
     position top
     tray_output *
 }
