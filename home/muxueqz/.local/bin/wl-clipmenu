@@ -1,0 +1,2 @@
+#!/bin/bash
+~/.local/bin/wl-clipboard-history -l | ymenu | (read -r -d',' clip_id c; echo $clip_id ; ~/.local/bin/wl-clipboard-history -p $clip_id| wl-copy)
