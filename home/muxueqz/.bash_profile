@@ -28,6 +28,7 @@ export MANPAGER='vim -u /usr/share/nvim/runtime/macros/less.vim -c "noremap gg :
 export GOTMPDIR=/tmp/build-tmps/
 export CM_LAUNCHER=~/.local/bin/clipmenu-launcher
 export CM_OUTPUT_CLIP=true
+export ROFI_PASS_BACKEND=wtype
 
 #alias bjovpn='sudo ifconfig eth0 down; sudo pkill dhclient; sudo ifconfig eth0 10.200.4.150 up ;sudo route add default gw 10.200.6.201; cd /media/ext4/update/openvpn/xlqy-vpn/;sudo openvpn --config X100-OpenVPN.ovpn --http-proxy 10.200.2.0 8080 --redirect-gateway;cd -'
 alias ls='ls --color=auto'
