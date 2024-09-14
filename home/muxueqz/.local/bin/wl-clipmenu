@@ -1,6 +1,7 @@
 #!/bin/bash
+	# ymenu |
 ~/.local/bin/wl-clipboard-history -l 30 |
-	ymenu |
+ ilia -p textlist |
 	(
 		read -r -d',' clip_id c
 		echo $clip_id

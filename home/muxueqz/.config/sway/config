@@ -117,13 +117,8 @@ bindsym $mod+e layout toggle split
 bindsym $mod+t floating toggle
 
 # bindsym $mod+f exec --no-startup-id rofi -show windowcd
-bindsym $mod+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py current_workspace \
-  | ymenu | ( read -r num id name  ; swaymsg "[con_id=$id]" focus )'
-# bindsym $mod+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py current_workspace \
-#   | rofi --show dmenu | ( read -r id name  ; swaymsg "[con_id=$id]" focus )'
-bindsym $mod+Shift+f exec --no-startup-id sh -c 'swaymsg -t get_tree | python3 $HOME/.config/sway/select-window.py \
-  | ymenu | ( read -r num id name  ; swaymsg "[con_id=$id]" focus )'
-# bindsym $mod+Shift+f exec --no-startup-id rofi -show window
+bindsym $mod+f exec --no-startup-id ~/.config/sway/list-window.sh current_workspace
+bindsym $mod+Shift+f exec --no-startup-id ~/.config/sway/list-window.sh
 
 bindsym $mod+w move scratchpad
 
