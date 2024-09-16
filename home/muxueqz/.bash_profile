@@ -20,7 +20,8 @@ export GTK_IM_MODULE=fcitx
 # export GTK_IM_MODULE=nimf
 
 export JAVA_HOME=/opt/jre
-export PATH=$HOME/.asdf/shims_faster/:$HOME/.dotfiles/$HOME/.local/bin:$HOME/.local/bin/:$PATH:/sbin:/usr/sbin:$HOME/bin:/opt/muxueqz-sh/:/opt/muxueqz-py:$JAVA_HOME/bin:/opt/Palm/novacom/:/home/muxueqz/.nimble/bin/:/data/work/project/node/bin/
+export PATH=$HOME/.asdf/shims_faster/:$HOME/.dotfiles/$HOME/.local/bin:$HOME/.local/bin/:$PATH:/sbin:/usr/sbin:$HOME/bin:/opt/muxueqz-sh/:/opt/muxueqz-py:$JAVA_HOME/bin:/opt/Palm/novacom/:/home/muxueqz/.nimble/bin/
+export PATH=$PATH:/data/work/projects/npm/.bin/:/data/work/project/node/bin/
 #export PAGER='vim -R -'
 export PAGER='less'
 # export PAGER='/usr/share/nvim/runtime/macros/less.sh'
