@@ -1,0 +1,62 @@
+#!/bin/bash
+USER_NAME=$1
+HOME=$(sh -c "echo ~$USER_NAME")
+USER_ID=$(id -u $1)
+CHROME_ENV_BASE=/dev/shm/chrome-env
+CHROME_ENV=${CHROME_ENV_BASE}/rootfs/
+sudo -u muxueqz mkdir -pv  /run/user/$USER_ID/dconf
+sudo -u muxueqz mkdir -pv ${CHROME_ENV}/{bin,data,dev,etc,home,lib,lib64,opt,proc,root,run,sys,tmp,usr,var}
+sudo -u muxueqz mkdir -pv ${CHROME_ENV}/${HOME}
+sudo -u muxueqz mkdir -pv ${CHROME_ENV}/run_user
+chmod 700 /run/user/$USER_ID/dconf ${CHROME_ENV_BASE}
+
+# chrome_processes=$(ps aux | grep systemd-nspawn | grep 'bash -c google-chrome' -c)
+# if [[ $chrome_processes == 2 ]] ; then
+  # google-chrome $@
+  # exit
+# fi
+
+sudo -v
+
+if [[ -e /dev/video0 ]] ; then
+  EXARGS=' --bind /dev/video0 '
+fi
+
+sudo systemd-nspawn \
+ -D ${CHROME_ENV} \
+ --bind ${CHROME_ENV}/run_user:/run/user/1000 \
+ --bind /run/user/1000/dconf \
+ --bind /run/user/1000/dbus-1 \
+ --bind /run/user/1000/systemd \
+ --bind /run/user/1000/bus \
+ --bind /run/dbus \
+  --bind $HOME/.config/fcitx \
+  --bind /run/user/1000/pulse --bind /dev/snd --bind /etc/pulse \
+  --bind /dev/dri \
+ -M $HOSTNAME \
+ --bind-ro /opt/google/chrome/ --bind $HOME/.config/google-chrome \
+ --bind $HOME/.config/google-chrome-extensions \
+ --bind $HOME/.config/google-chrome-dev-extensions \
+ --bind-ro /var \
+ --bind /tmp/  \
+ --bind /data/work/project/xsj/Programmer-s-Almanac/  \
+ --bind $HOME/Downloads \
+   --bind /run/user/$USER_ID/gnupg --bind $HOME/.gnupg --bind $HOME/.password-store/ \
+ --bind ${HOME}/.Xauthority --bind-ro /etc \
+ --bind-ro /lib64/ --bind-ro /lib --bind-ro /usr --bind-ro /bin \
+ --user $USER_NAME \
+ --setenv DISPLAY=$DISPLAY  --setenv PULSE_SERVER=unix:/run/user/1000/pulse/native \
+  --setenv XMODIFIERS="@im=fcitx" \
+  --setenv QT_IM_MODULE=fcitx \
+  --setenv GTK_IM_MODULE=fcitx \
+  --setenv LC_ALL="zh_CN.UTF-8" \
+  --setenv XDG_RUNTIME_DIR=/run/user/1000 \
+ --share-system \
+ $EXARGS \
+ bash -c "google-chrome-stable" &
+ # bash -c "google-chrome-stable $@" &
+ # xterm
+ # google-chrome --user-data-dir=/dev/shm/chrome-test &
+ # google-chrome &
+  # --bind /data/
+ # --bind /run/ \

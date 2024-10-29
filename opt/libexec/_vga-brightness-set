@@ -1,0 +1,5 @@
+#!/bin/sh
+/sbin/modprobe i2c-dev
+device=2
+[ ! -z $2 ] && device=$2
+ddcutil setvcp 10 $1 -d $device
