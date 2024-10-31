@@ -11,6 +11,7 @@ focused_workspace = ""
 I3_IPC_MAGIC = b"i3-ipc"
 I3_IPC_MESSAGE_TYPE_GET_TREE = 4
 I3_IPC_MESSAGE_TYPE_COMMAND = 0
+I3_IPC_MESSAGE_TYPE_WORKSPACE = 1
 
 # Get SWAYSOCK or I3 socket from environment
 sway_socket = os.environ.get("SWAYSOCK")
@@ -51,6 +52,37 @@ def i3_msg(message_type, payload=""):
 
         return response_payload.decode("utf-8")
 
+def ipc_query(req=I3_IPC_MESSAGE_TYPE_COMMAND, msg=""):
+    ans = i3_msg(req, msg)
+    return json.loads(ans)
+
+def switch_workspace(argv):
+    # Usage & checking args
+    if len(argv) != 2:
+        print("Usage: switch-workspace.py name-of-workspace")
+        exit(-1)
+
+    newworkspace = argv[1]
+
+    # Retrieving active display
+    active_display = None
+    old_display = None
+    for w in ipc_query(I3_IPC_MESSAGE_TYPE_WORKSPACE):
+        if w['focused']:
+            active_display = w['output']
+            print(w)
+        if str(w['num']) == newworkspace:
+            print(w)
+            old_display = w['output']
+
+    if active_display == old_display:
+        msg = "workspace number %s" % newworkspace
+        print(ipc_query(msg=msg))
+        exit(0)
+    # Moving workspace to active display
+    msg = "'workspace number %s; move workspace to output %s; workspace number %s'" % (newworkspace,
+        active_display, newworkspace)
+    print(ipc_query(msg=msg))
 
 def extract_nodes_iterative(workspace):
     """Extracts all windows from a sway workspace json object"""
@@ -110,13 +142,21 @@ def get_windows(only_workspace=False):
     return windows
 
 
-if __name__ == "__main__":
+def select_window(argv):
     only_workspace = False
     try:
-        if sys.argv[1] == "current_workspace":
+        if argv[1] == "current_workspace":
             only_workspace = True
     except Exception as e:
         pass
     r = get_windows(only_workspace)
     for n, i in enumerate(r):
         print(f"{n+1}. {i['id']} {i['name']}")
+
+func_map = {
+  "select-window": select_window,
+  "switch-workspace": switch_workspace,
+  }
+if __name__ == "__main__":
+  func = func_map.get(sys.argv[1])
+  func(sys.argv[1:])

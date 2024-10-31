@@ -3,10 +3,11 @@
 from json import loads
 from os import popen
 from sys import argv
+import i3_tools
 
-def ipc_query(req="command", msg=""):
+def ipc_query(req=i3_tools.I3_IPC_MESSAGE_TYPE_COMMAND, msg=""):
     print((req, msg))
-    ans = popen("i3-msg -t " + req + " " +  msg).readlines()[0]
+    ans = i3_tools.i3_msg(req, msg)
     return loads(ans)
 
 if __name__ == "__main__":
@@ -20,7 +21,9 @@ if __name__ == "__main__":
     # Retrieving active display
     active_display = None
     old_display = None
-    for w in ipc_query(req="get_workspaces"):
+    # for w in ipc_query(req="get_workspaces"):
+    ws = i3_tools.i3_msg(i3_tools.I3_IPC_MESSAGE_TYPE_WORKSPACE)
+    for w in loads(ws):
         if w['focused']:
             active_display = w['output']
             print(w)
@@ -29,7 +32,8 @@ if __name__ == "__main__":
             old_display = w['output']
 
     if active_display == old_display:
-        msg = "'workspace number %s'" % newworkspace
+        # msg = "'workspace number %s'" % newworkspace
+        msg = "workspace number %s" % newworkspace
         print(ipc_query(msg=msg))
         exit(0)
     # Moving workspace to active display
