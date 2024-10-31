@@ -119,8 +119,7 @@ def extract_nodes_iterative(workspace):
 
 def get_windows(only_workspace=False):
     """Returns a list of all json window objects"""
-    tree_json = i3_msg(I3_IPC_MESSAGE_TYPE_GET_TREE)
-    data = json.loads(tree_json)
+    data = ipc_query(I3_IPC_MESSAGE_TYPE_GET_TREE)
 
     # Select outputs that are active
     workspace_windows = {}
