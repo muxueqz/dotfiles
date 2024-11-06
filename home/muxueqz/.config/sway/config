@@ -148,14 +148,14 @@ set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace
-bindsym $mod+1 exec --no-startup-id python ~/.config/sway/i3_tools.py switch-workspace $ws1
-bindsym $mod+2 exec --no-startup-id python ~/.config/sway/i3_tools.py switch-workspace $ws2
-bindsym $mod+3 exec --no-startup-id python ~/.config/sway/i3_tools.py switch-workspace $ws3
-bindsym $mod+4 exec --no-startup-id python ~/.config/sway/i3_tools.py switch-workspace $ws4
-bindsym $mod+5 exec --no-startup-id python ~/.config/sway/i3_tools.py switch-workspace $ws5
-bindsym $mod+6 exec --no-startup-id python ~/.config/sway/i3_tools.py switch-workspace $ws6
-bindsym $mod+7 exec --no-startup-id python ~/.config/sway/i3_tools.py switch-workspace $ws7
-bindsym $mod+8 exec --no-startup-id python ~/.config/sway/i3_tools.py switch-workspace $ws8
+bindsym $mod+1 exec --no-startup-id python3 ~/.config/sway/i3_tools.py switch-workspace $ws1
+bindsym $mod+2 exec --no-startup-id python3 ~/.config/sway/i3_tools.py switch-workspace $ws2
+bindsym $mod+3 exec --no-startup-id python3 ~/.config/sway/i3_tools.py switch-workspace $ws3
+bindsym $mod+4 exec --no-startup-id python3 ~/.config/sway/i3_tools.py switch-workspace $ws4
+bindsym $mod+5 exec --no-startup-id python3 ~/.config/sway/i3_tools.py switch-workspace $ws5
+bindsym $mod+6 exec --no-startup-id python3 ~/.config/sway/i3_tools.py switch-workspace $ws6
+bindsym $mod+7 exec --no-startup-id python3 ~/.config/sway/i3_tools.py switch-workspace $ws7
+bindsym $mod+8 exec --no-startup-id python3 ~/.config/sway/i3_tools.py switch-workspace $ws8
 # bindsym $mod+2 workspace number $ws2
 # bindsym $mod+3 workspace number $ws3
 # bindsym $mod+4 workspace number $ws4
