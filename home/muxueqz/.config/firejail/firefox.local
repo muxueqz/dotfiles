@@ -4,7 +4,6 @@ dbus-user.own org.mpris.MediaPlayer2.firefox.*
 # Uncomment or put in your firefox.local to enable native notifications.
 dbus-user.talk org.freedesktop.Notifications
 
-dbus-user.talk org.freedesktop.portal.Fcitx
 dbus-user.talk org.freedesktop.portal.Desktop
 
 ignore dbus-user none
@@ -36,7 +35,6 @@ whitelist ${RUNUSER}/pulse
 whitelist /data/iso/Downloads/
 whitelist /data/iso/下载/
 read-only ${HOME}/.Xauthority
-read-only ${HOME}/.config/fcitx
 
 whitelist ${HOME}/.config/google-chrome-extensions
 read-only ${HOME}/.config/google-chrome-extensions
@@ -49,4 +47,5 @@ read-only /etc/pulse
 ignore private-tmp
 include pass.inc
 include allow-busybox.inc
+include fcitx.inc
 keep-dev-shm
