@@ -16,10 +16,10 @@ get_keyboard_device() {
 turn_off_screen() {
 	echo "turn off screen"
 	if [ $(swaymsg -t get_outputs | grep '"power":.*false' | sort | uniq | wc -l) -eq 0 ]; then
-		echo "screen already off, so it does not need to turn off again"
+		swaymsg "output * dpms off"
 		return
 	fi
-	swaymsg "output * dpms off"
+	echo "screen already off, so it does not need to turn off again"
 }
 
 turn_on_screen() {
