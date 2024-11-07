@@ -3,6 +3,7 @@
 # TIMEOUT=180
 TIMEOUT=60
 # TIMEOUT=10
+TURN_ON_STARTING=0
 LAST_INPUT_TIME_FILE="/tmp/last_input_time"
 
 get_keyboard_device() {
@@ -15,7 +16,11 @@ get_keyboard_device() {
 
 turn_off_screen() {
 	echo "turn off screen"
-	if [ $(swaymsg -t get_outputs | grep '"power":.*false' | sort | uniq | wc -l) -eq 0 ]; then
+	if
+		[[ 
+			$(swaymsg -t get_outputs | grep '"power":.*true' -c) -gt 0 &&
+			$TURN_ON_STARTING == 0 ]]
+	then
 		swaymsg "output * dpms off"
 		return
 	fi
@@ -24,7 +29,12 @@ turn_off_screen() {
 
 turn_on_screen() {
 	echo "turn on screen"
+	TURN_ON_STARTING=1
 	swaymsg "output * dpms on"
+	echo "turn on screen sleeping"
+	sleep 10s
+	echo "turn on screen unlock"
+	TURN_ON_STARTING=0
 }
 
 monitor_keyboard() {
