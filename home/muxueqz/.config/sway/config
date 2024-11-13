@@ -106,6 +106,7 @@ bindsym $mod+0 exec --no-startup-id amixer sset 'Master' 10%+
 bindsym $mod+9 exec --no-startup-id amixer sset 'Master' 10%-
 bindsym $mod+Shift+s exec --no-startup-id /opt/muxueqz-sh/steam-input-helper.sh
 bindsym $mod+Shift+h exec --no-startup-id ~/.dotfiles/home/muxueqz/.local/bin/wl-clipmenu
+bindsym $mod+Shift+p exec --no-startup-id rofi-pass
 
 
 default_border pixel 1
