@@ -52,9 +52,11 @@ def i3_msg(message_type, payload=""):
 
         return response_payload.decode("utf-8")
 
+
 def ipc_query(req=I3_IPC_MESSAGE_TYPE_COMMAND, msg=""):
     ans = i3_msg(req, msg)
     return json.loads(ans)
+
 
 def switch_workspace(argv):
     # Usage & checking args
@@ -68,24 +70,21 @@ def switch_workspace(argv):
     active_display = None
     old_display = None
     for w in ipc_query(I3_IPC_MESSAGE_TYPE_WORKSPACE):
-        if w['focused']:
-            active_display = w['output']
+        if w["focused"]:
+            active_display = w["output"]
             print(w)
-        if str(w['num']) == newworkspace:
+        if str(w["num"]) == newworkspace:
             print(w)
-            old_display = w['output']
+            old_display = w["output"]
 
     if active_display == old_display:
         msg = "workspace number %s" % newworkspace
         print(ipc_query(msg=msg))
         exit(0)
     # Moving workspace to active display
-    print(ipc_query(msg=
-    f"workspace number {newworkspace};"
-                    ))
-    print(ipc_query(msg=
-    f"move workspace to output {active_display}"
-                    ))
+    print(ipc_query(msg=f"workspace number {newworkspace};"))
+    print(ipc_query(msg=f"move workspace to output {active_display}"))
+
 
 def extract_nodes_iterative(workspace):
     """Extracts all windows from a sway workspace json object"""
@@ -155,10 +154,11 @@ def select_window(argv):
     for n, i in enumerate(r):
         print(f"{n+1}. {i['id']} {i['name']}")
 
+
 func_map = {
-  "select-window": select_window,
-  "switch-workspace": switch_workspace,
-  }
+    "select-window": select_window,
+    "switch-workspace": switch_workspace,
+}
 if __name__ == "__main__":
-  func = func_map.get(sys.argv[1])
-  func(sys.argv[1:])
+    func = func_map.get(sys.argv[1])
+    func(sys.argv[1:])
