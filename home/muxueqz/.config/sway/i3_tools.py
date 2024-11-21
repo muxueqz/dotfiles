@@ -80,9 +80,12 @@ def switch_workspace(argv):
         print(ipc_query(msg=msg))
         exit(0)
     # Moving workspace to active display
-    msg = "'workspace number %s; move workspace to output %s; workspace number %s'" % (newworkspace,
-        active_display, newworkspace)
-    print(ipc_query(msg=msg))
+    print(ipc_query(msg=
+    f"workspace number {newworkspace};"
+                    ))
+    print(ipc_query(msg=
+    f"move workspace to output {active_display}"
+                    ))
 
 def extract_nodes_iterative(workspace):
     """Extracts all windows from a sway workspace json object"""
