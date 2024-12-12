@@ -107,10 +107,6 @@ ipydb() {
 	/data/work/project/ipydb_venv/bin/ipython --profile=ipydb
 }
 
-ipv6-pac-update() {
-	wget http://gfw-proxy.co.cc/proxy.pac
-}
-
 allmount() {
 	sudo echo starting...
 	cd /dev
@@ -121,11 +117,6 @@ allmount() {
 	done # 1> /dev/null 2>&1
 	cd -
 }
-gapclient() {
-	cd /data/work/code/py/gapproxy-client-2.0.0/
-	python proxy.py
-}
-
 # alias set_proxy="export http_proxy='http://127.0.0.1:11082' ; export https_proxy=\$http_proxy"
 set-proxy() {
 	if [[ -z $1 ]]; then
@@ -143,17 +134,6 @@ mksniso() {
 	sudo mkisofs -r -T -J -V “bjsn” -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $1 $PWD
 }
 
-xsj_ovpn() {
-	TMP_DIR=$(mktemp -d)
-	rsync -av --progress /data/encfs/cfg/xsj_vpn/YWvpn/ ${TMP_DIR}
-	sudo chown -R root ${TMP_DIR}
-	sudo chmod -R 550 ${TMP_DIR}
-	cd ${TMP_DIR}
-	sudo openvpn --config client.ovpn --daemon --route-nopull --route 172.30.0.73
-	sudo rm -rf ${TMP_DIR}
-	cd -
-}
-
 docker_portmapping() {
 	container_name=$1
 	src_port=$2
@@ -166,33 +146,6 @@ docker_portmapping() {
 7zcat() {
 	#PATH=${GZIP_BINDIR-'/bin'}:$PATH
 	exec 7z e -so -bd "$@" 2>/dev/null | cat
-}
-monster_publish() {
-	pkg_ver=$1
-	export version=${pkg_ver}
-	export prev_version=$2
-	source /data/work/project/mosclient_venv/monster_auto_update.sh
-	source /data/work/project/mosclient_venv/bin/activate
-
-	bash scripts/make_package.sh
-	#Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster_norepos-${pkg_ver}.tar.gz && exit"
-	#Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster_update-${pkg_ver}.tar.gz && exit"
-	##Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster-${pkg_ver}.tar.gz && exit"
-	bypy mkdir ${pkg_ver}
-	for i in /data/vm/make_docker/monster*${pkg_ver}.tar.gz; do
-		echo $i
-		bypy upload $i ${pkg_ver}
-	done
-	#Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster-${pkg_ver}.tar.gz && exit"
-	unset version prev_version
-}
-
-monster_agent_publish() {
-	export pkg_ver=$1
-	export version=${pkg_ver}
-	bash pkgs/make_package.sh
-	Auto-lftp.sh mos_bj3_pkgs 22 "mput /data/vm/make_docker/monster_agent_go-${pkg_ver}.tar.gz && exit"
-	unset version pkg_ver
 }
 
 kvm-temp-vm() {
@@ -228,29 +181,6 @@ temp-workspaces() {
 }
 alias tw=temp-workspaces
 
-parse_git_branch() {
-	local readonly GIT_SEPARATOR=''
-	local readonly INFO_FG='\033[0;34m'
-	local readonly SUCCESS_FG="\033[0;12m"
-	local readonly COMMON_INV_FG="\033[0;30m"
-	local readonly COMMON_LIGHT_FG="\033[0;36m"
-	local readonly SUCCESS_BG="\033[46m"
-	local readonly COMMON_BG="\033[40m"
-	local readonly RESET='\033[0m'
-	local consoleBackColor="$COMMON_BG"
-	local consoleColor="$COMMON_INV_FG"
-	local branchBackColor="$SUCCESS_BG"
-	local branchColor="$SUCCESS_FG"
-	local branch=$(git branch --show-current 2>/dev/null)
-	if [[ ${branch} != '' ]]; then
-		echo -e "$INFO_FG$branchBackColor$GIT_SEPARATOR$branchColor$branchBackColor${branch}$COMMON_LIGHT_FG$consoleBackColor$GIT_SEPARATOR$RESET"
-	else
-		echo -e "$INFO_FG$consoleBackColor$GIT_SEPARATOR$RESET"
-	fi
-}
-# from miniline.sh
-# export PS1='\[\033[44m\]\[\033[1;37m\] \w \[\033[0m\]`parse_git_branch`\[\033[40m\]\[\033[1;37m\] \$ \[\033[40m\]\[\033[0;30m\]\[\033[0m\] '
-# export PS1='\[\033[44m\]\[\033[1;37m\] \w \[\033[0m\]\[`parse_git_branch`\]\[\033[40m\]\[\033[1;37m\] \$ \[\033[40m\]\[\033[0;30m\]\[\033[0m\] '
 source ~/workspaces/powerline-bash/.powerline-bash.sh
 source ~/.dotfiles/$HOME/.bash_completion
 
