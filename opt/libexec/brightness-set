@@ -1,0 +1,22 @@
+#!/bin/bash
+brightness_file=/sys/class/backlight/intel_backlight/brightness 
+MAX_BRIGHTNESS=`cat /sys/class/backlight/intel_backlight/max_brightness`
+PRO_VOLUME=`expr ${MAX_BRIGHTNESS} / 60`
+CURRENT_VALUE=`cat ${brightness_file}`
+case "$1" in
+  up)
+	VALUE=`expr ${CURRENT_VALUE} + ${PRO_VOLUME}`
+	[[ ${VALUE} -gt ${MAX_BRIGHTNESS} ]] && VALUE=${MAX_BRIGHTNESS}
+	echo $VALUE > ${brightness_file}
+	;;
+  down)
+	VALUE=`expr ${CURRENT_VALUE} - ${PRO_VOLUME}`
+	[[ ${VALUE} -lt 0 ]] && VALUE=0
+	echo $VALUE > ${brightness_file}
+	;;
+  *)
+	echo "Usage: $SCRIPTNAME {up|down}" >&2
+	exit 3
+	;;
+esac
+echo $VALUE
