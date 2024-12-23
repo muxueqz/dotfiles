@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # TIMEOUT=180
-TIMEOUT=60
-# TIMEOUT=10
+TIMEOUT=${1:-60}
+
 TURN_ON_STARTING=0
 LAST_INPUT_TIME_FILE="/tmp/last_input_time"
 
