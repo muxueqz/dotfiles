@@ -49,7 +49,7 @@ monitor_keyboard() {
 
 DEVICE=$(get_keyboard_device)
 touch $LAST_INPUT_TIME_FILE
-turn_off_screen
+# turn_off_screen
 for d in $DEVICE; do
 	monitor_keyboard $d &
 done
