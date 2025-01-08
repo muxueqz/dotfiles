@@ -3,8 +3,8 @@
 # TIMEOUT=180
 TIMEOUT=${1:-60}
 
-TURN_ON_STARTING=0
 LAST_INPUT_TIME_FILE="/tmp/last_input_time"
+LOCK_FILE=/dev/shm/sway_idle.lock
 
 get_keyboard_device() {
 	for device in /dev/input/event*; do
@@ -16,25 +16,16 @@ get_keyboard_device() {
 
 turn_off_screen() {
 	echo "turn off screen"
-	if
-		[[ 
-			$(swaymsg -t get_outputs | grep '"power":.*true' -c) -gt 0 &&
-			$TURN_ON_STARTING == 0 ]]
-	then
-		swaymsg "output * dpms off"
+	[[ $(swaymsg -t get_outputs | grep '"power":.*true' -c) -gt 0 ]] &&
+		flock -n $LOCK_FILE -c 'swaymsg "output * dpms off"; sleep 10s' &&
 		return
-	fi
 	echo "screen already off, so it does not need to turn off again"
 }
 
 turn_on_screen() {
 	echo "turn on screen"
-	TURN_ON_STARTING=1
-	swaymsg "output * dpms on"
-	echo "turn on screen sleeping"
-	sleep 10s
+	flock -n $LOCK_FILE -c 'swaymsg "output * dpms on"; sleep 10s'
 	echo "turn on screen unlock"
-	TURN_ON_STARTING=0
 }
 
 monitor_keyboard() {
@@ -48,8 +39,7 @@ monitor_keyboard() {
 }
 
 DEVICE=$(get_keyboard_device)
-touch $LAST_INPUT_TIME_FILE
-# turn_off_screen
+date +%s >"$LAST_INPUT_TIME_FILE"
 for d in $DEVICE; do
 	monitor_keyboard $d &
 done
