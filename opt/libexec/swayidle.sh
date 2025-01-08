@@ -17,7 +17,7 @@ get_keyboard_device() {
 turn_off_screen() {
 	echo "turn off screen"
 	[[ $(swaymsg -t get_outputs | grep '"power":.*true' -c) -gt 0 ]] &&
-		flock -n $LOCK_FILE -c 'swaymsg "output * dpms off"; sleep 10s' &&
+		flock -n $LOCK_FILE -c 'swaymsg "output * dpms off"; sleep 1s' &&
 		return
 	echo "screen already off, so it does not need to turn off again"
 }
