@@ -39,7 +39,6 @@ monitor_keyboard() {
 }
 
 DEVICE=$(get_keyboard_device)
-date +%s >"$LAST_INPUT_TIME_FILE"
 for d in $DEVICE; do
 	monitor_keyboard $d &
 done
