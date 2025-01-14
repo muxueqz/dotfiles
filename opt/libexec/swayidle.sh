@@ -15,17 +15,17 @@ get_keyboard_device() {
 }
 
 turn_off_screen() {
-	echo "turn off screen"
+	echo "$(date) turn off screen"
 	[[ $(swaymsg -t get_outputs | grep '"power":.*true' -c) -gt 0 ]] &&
 		flock -n $LOCK_FILE -c 'swaymsg "output * dpms off"; sleep 1s' &&
 		return
-	echo "screen already off, so it does not need to turn off again"
+	echo "$(date) screen already off, so it does not need to turn off again"
 }
 
 turn_on_screen() {
-	echo "turn on screen"
+	echo "$(date) turn on screen"
 	flock -n $LOCK_FILE -c 'swaymsg "output * dpms on"; sleep 10s'
-	echo "turn on screen unlock"
+	echo "$(date) turn on screen unlock"
 }
 
 monitor_keyboard() {
