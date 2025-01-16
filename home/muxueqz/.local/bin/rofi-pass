@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+check-pass.py
 
 # rofi-pass
 # (c) 2015 Rasmus Steinke <rasi@xssn.at>
