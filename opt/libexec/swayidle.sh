@@ -24,7 +24,7 @@ turn_off_screen() {
 
 turn_on_screen() {
 	echo "$(date) turn on screen"
-	flock -n $LOCK_FILE -c 'swaymsg "output * dpms on"; sleep 10s'
+	flock -n $LOCK_FILE -c 'swaymsg "output * dpms on"; sleep 30s'
 	echo "$(date) turn on screen unlock"
 }
 
