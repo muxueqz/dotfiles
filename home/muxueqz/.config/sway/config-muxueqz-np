@@ -1,4 +1,4 @@
 output DP-1 scale 2
 output HDMI-A-1 scale 1.1 transform 270
 include ~/.config/sway/config
-exec --no-startup-id 'cd /data/work/projects/xray-linux-32; ./wrap.sh ./xray run -c ./NAT_DDNS/bridge.json &> /dev/shm/xray.log &'
+#exec --no-startup-id 'cd /data/work/projects/xray-linux-32; ./wrap.sh ./xray run -c ./NAT_DDNS/bridge.json &> /dev/shm/xray.log &'
