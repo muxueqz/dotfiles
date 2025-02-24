@@ -31,4 +31,5 @@ processed_output=$(echo "$selected_text" |
 
 # Copy the processed output back to the primary selection.
 echo "$processed_output" | wl-copy
+wtype $(wl-paste)
 notify-send "fix-english.sh" "finished:$(wl-paste)"
