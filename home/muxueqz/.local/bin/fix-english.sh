@@ -26,10 +26,11 @@ fi
 # Replace '/path/to/another_script.sh' with the actual path to your script.
 prompt='Corrects English spelling and grammar errors with explanations, just output Corrected Sentence result, no explain, no header, no prefix:'
 processed_output=$(echo "$selected_text" | 
-  ask_ai.py "$prompt"
+  ask_ai_local.py "$prompt"
+  # ask_ai.py "$prompt"
 )
 
 # Copy the processed output back to the primary selection.
 echo "$processed_output" | wl-copy
 wtype $(wl-paste)
-notify-send "fix-english.sh" "finished:$(wl-paste)"
+notify-send -t 3000 "fix-english.sh" "finished:$(wl-paste)"
