@@ -24,7 +24,9 @@ fi
 
 # Process the text with your external script.
 # Replace '/path/to/another_script.sh' with the actual path to your script.
-prompt='Corrects English spelling and grammar errors with explanations, just output Corrected Sentence result, no explain, no header, no prefix:'
+# prompt='Corrects English spelling and grammar errors without explanations, just output Corrected Sentence result, no explain, no header, no prefix, just content:'
+
+prompt='Act as an expert English editor. Review the text I provide, correct any spelling or grammar errors, and ensure the revised version maintains the original meaning and tone. Return only the corrected text:'
 processed_output=$(echo "$selected_text" | 
   ask_ai_local.py "$prompt"
   # ask_ai.py "$prompt"
