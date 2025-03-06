@@ -7,12 +7,4 @@ echo $OTP
 echo $OTP | wtype -
 
 export OTP=$OTP
-python3 << EOF
-#!/usr/bin/env python3
-from os import getenv
-import dbus
-
-obj = dbus.SessionBus().get_object("org.freedesktop.Notifications", "/org/freedesktop/Notifications")
-obj = dbus.Interface(obj, "org.freedesktop.Notifications")
-obj.Notify("", 0, "", "OTP Code", getenv("OTP", "None"), [], {"urgency": 1}, 10000)
-EOF
+notify-send -t 10000 "OTP code" $OTP
