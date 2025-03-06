@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+import argparse
+import dbus
+
+# Parse command-line arguments
+parser = argparse.ArgumentParser(description='Send a desktop notification')
+parser.add_argument('summary', help='Notification summary')
+parser.add_argument('body', nargs='?', default='', help='Notification body')
+parser.add_argument('-u', '--urgency', choices=['low', 'normal', 'critical'], default='normal', help='Urgency level')
+parser.add_argument('-t', '--expire-time', type=int, default=5000, help='Expiration time in milliseconds')
+parser.add_argument('-a', '--app-name', default='', help='Application name')
+parser.add_argument('-i', '--icon', default='', help='Notification icon')
+args = parser.parse_args()
+
+# Map urgency level to dbus urgency values
+urgency_levels = {'low': 0, 'normal': 1, 'critical': 2}
+
+# Send notification via D-Bus
+obj = dbus.SessionBus().get_object("org.freedesktop.Notifications", "/org/freedesktop/Notifications")
+obj = dbus.Interface(obj, "org.freedesktop.Notifications")
+obj.Notify(args.app_name, 0, args.icon, args.summary, args.body, [], {"urgency": dbus.Byte(urgency_levels[args.urgency])}, args.expire_time)
