@@ -6,7 +6,9 @@ source ~/.asdf/asdf.sh
 export HISTCONTROL=ignoredups:erasedups
 export EDITOR=~/.local/bin/lvim
 
-export LC_ALL=zh_CN.UTF-8
+# export LC_ALL=C
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=zh_CN.UTF-8
 export XMODIFIERS="@im=fcitx"
 export QT_IM_MODULE=fcitx
 export GTK_IM_MODULE=fcitx
