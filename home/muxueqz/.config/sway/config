@@ -108,6 +108,7 @@ bindsym $mod+9 exec --no-startup-id amixer sset 'Master' 10%-
 bindsym $mod+Shift+s exec --no-startup-id /opt/muxueqz-sh/steam-input-helper.sh
 bindsym $mod+Shift+h exec --no-startup-id ~/.dotfiles/home/muxueqz/.local/bin/wl-clipmenu
 bindsym $mod+Shift+p exec --no-startup-id rofi-pass
+bindsym $mod+c exec --no-startup-id fix-english.sh
 
 
 default_border pixel 1
@@ -122,7 +123,8 @@ bindsym $mod+t floating toggle
 
 # bindsym $mod+f exec --no-startup-id rofi -show windowcd
 bindsym $mod+f exec --no-startup-id ~/.config/sway/list-window.sh current_workspace
-bindsym $mod+Shift+f exec --no-startup-id ~/.config/sway/list-window.sh
+# bindsym $mod+Shift+f exec --no-startup-id ~/.config/sway/list-window.sh
+bindsym $mod+Shift+f exec --no-startup-id rofi -show window
 
 bindsym $mod+w move scratchpad
 
