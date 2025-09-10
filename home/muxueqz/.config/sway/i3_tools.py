@@ -4,8 +4,12 @@ import json
 import socket
 import struct
 import os
+import subprocess
 
 focused_workspace = ""
+app_id_mapping = {
+    "Google-chrome": "google-chrome",
+}
 
 # Constants for i3/sway IPC
 I3_IPC_MAGIC = b"i3-ipc"
@@ -151,8 +155,35 @@ def select_window(argv):
     except Exception as e:
         pass
     r = get_windows(only_workspace)
+    dmenu_str = ""
     for n, i in enumerate(r):
-        print(f"{n+1}. {i['id']} {i['name']}")
+        icon = i.get("app_id")
+        if icon is None:
+            icon = i.get("window_properties", {}).get("class", "")
+            icon = app_id_mapping.get(icon, icon)
+
+        dmenu_str += f"{icon}\t{i['name']}\0icon\x1f{icon}\n"
+
+
+    selected = subprocess.run(
+        [
+            "fuzzel",
+            "--dmenu",
+            "--index",
+            "-w", "80",
+            "--counter",
+            "--prompt",
+            "Window>",
+        ],
+        input=dmenu_str,
+        text=True,
+        capture_output=True,
+    ).stdout.strip()
+    if selected:
+        selected_window = r[int(selected)]
+    # Tell sway to focus said window
+        window_id = selected_window.get("id")
+        subprocess.run(["swaymsg", f"[con_id={window_id}] focus"])
 
 
 func_map = {
