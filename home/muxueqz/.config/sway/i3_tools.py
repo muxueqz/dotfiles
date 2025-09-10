@@ -165,7 +165,7 @@ def select_window(argv):
         dmenu_str += f"{icon}\t{i['name']}\0icon\x1f{icon}\n"
 
 
-    selected = subprocess.run(
+    p = subprocess.run(
         [
             "fuzzel",
             "--dmenu",
@@ -178,7 +178,10 @@ def select_window(argv):
         input=dmenu_str,
         text=True,
         capture_output=True,
-    ).stdout.strip()
+    )
+    selected = p.stdout.strip()
+    if p.returncode > 10 and p.returncode < 20:
+        selected = str(p.returncode - 10)
     if selected:
         selected_window = r[int(selected)]
     # Tell sway to focus said window
