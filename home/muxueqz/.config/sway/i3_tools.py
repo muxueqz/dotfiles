@@ -173,7 +173,7 @@ def select_window(argv):
             "-w", "80",
             "--counter",
             "--prompt",
-            "Window>",
+            "Window > ",
         ],
         input=dmenu_str,
         text=True,
