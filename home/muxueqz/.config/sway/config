@@ -123,8 +123,7 @@ bindsym $mod+t floating toggle
 
 # bindsym $mod+f exec --no-startup-id rofi -show windowcd
 bindsym $mod+f exec --no-startup-id ~/.config/sway/list-window.sh current_workspace
-# bindsym $mod+Shift+f exec --no-startup-id ~/.config/sway/list-window.sh
-bindsym $mod+Shift+f exec --no-startup-id rofi -show window
+bindsym $mod+Shift+f exec --no-startup-id ~/.config/sway/list-window.sh
 
 bindsym $mod+w move scratchpad
 
