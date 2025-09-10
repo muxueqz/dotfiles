@@ -9,6 +9,7 @@ import subprocess
 focused_workspace = ""
 app_id_mapping = {
     "Google-chrome": "google-chrome",
+    "x-terminal-emulator": "terminal",
 }
 
 # Constants for i3/sway IPC
@@ -160,7 +161,7 @@ def select_window(argv):
         icon = i.get("app_id")
         if icon is None:
             icon = i.get("window_properties", {}).get("class", "")
-            icon = app_id_mapping.get(icon, icon)
+        icon = app_id_mapping.get(icon, icon)
 
         dmenu_str += f"{icon}\t{i['name']}\0icon\x1f{icon}\n"
 
