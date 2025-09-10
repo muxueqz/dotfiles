@@ -1,3 +1,6 @@
 [submodule "home/muxueqz/.config/mpv-image-viewer"]
 	path = home/muxueqz/.config/mpv-image-viewer
 	url = https://github.com/muxueqz/mpv-image-viewer.git
+[submodule "home/muxueqz/.config/fuzzel/fuzzel"]
+	path = home/muxueqz/.config/fuzzel/fuzzel
+	url = https://github.com/catppuccin/fuzzel/
