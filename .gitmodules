@@ -4,3 +4,6 @@
 [submodule "home/muxueqz/.config/fuzzel/fuzzel"]
 	path = home/muxueqz/.config/fuzzel/fuzzel
 	url = https://github.com/catppuccin/fuzzel/
+[submodule "opt/trash.sh"]
+	path = opt/trash.sh
+	url = https://github.com/muxueqz/trash.sh
