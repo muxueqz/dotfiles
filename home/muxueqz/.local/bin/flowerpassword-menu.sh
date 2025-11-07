@@ -16,13 +16,7 @@ fuzzel_input() {
     fuzzel --dmenu --prompt "$prompt" --placeholder "$prompt"
 }
 
-# 1) Optional username prompt (uncomment if you want to use it)
-# username=$(fuzzel_input "Choose username (or leave empty)")
-# if [ -n "$username" ]; then
-#     export HUAMI_USER="$username"
-# fi
-
-# 2) Prepare history list for argument selection
+# 1) Prepare history list for argument selection
 # Read history (most recent first)
 mapfile -t history_lines < <(awk 'NF' "$HISTORY_FILE" | tac)
 
@@ -37,7 +31,7 @@ if [ -z "$chosen_arg" ]; then
     exit 2
 fi
 
-# 3) Password prompt (hidden)
+# 2) Password prompt (hidden)
 password=$(fuzzel --dmenu --prompt "> " --password --placeholder "Please type password")
 # If user pressed Esc or cancelled, fuzzel returns non-zero -> exit
 if [ -z "$password" ]; then
