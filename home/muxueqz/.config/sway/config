@@ -10,6 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $i3tools /data/work/projects/i3tools.nim/i3tools
+
 #Windows Key
 set $mod Mod4
 
@@ -58,7 +59,8 @@ bindsym $mod+x kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+p exec --no-startup-id rofi -show run -matching fuzzy
+# bindsym $mod+p exec --no-startup-id rofi -show run -matching fuzzy
+bindsym $mod+p exec --no-startup-id launcher.sh
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -122,8 +124,8 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+t floating toggle
 
-bindsym $mod+f exec --no-startup-id $i3tools select-window current_workspace
-bindsym $mod+Shift+f exec --no-startup-id $i3tools select-window
+bindsym $mod+f exec --no-startup-id $i3tools windowcd
+bindsym $mod+Shift+f exec --no-startup-id $i3tools window
 
 bindsym $mod+w move scratchpad
 
@@ -228,6 +230,11 @@ bar {
 
 input "type:touchpad" {
     tap enabled
+}
+
+input "0:0:BT5.2_Mouse" {
+    scroll_factor 0.05
+    scroll_method on_button_down
 }
 
 # for_window [class="ymenu"] floating enable
