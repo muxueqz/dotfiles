@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Config
-HISTORY_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/huami_args_history"
+HISTORY_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/seek_args_history"
 MAX_HISTORY=50
 
 # Ensure history file exists
@@ -41,9 +41,8 @@ fi
 
 # 4) Run huami.py with the chosen argument, with password exported as env var huami
 # Quote carefully
-echo "Running huami.py with arg: $chosen_arg"
 # huami="$password" huami.py -- "$chosen_arg" | toclip
-huami="$password" huami.py "$chosen_arg" | wl-copy
+echo "$password" | seekpassword.py "$chosen_arg" - | wl-copy
 
 # 5) Update history: add chosen_arg to top, dedupe, limit size
 # Use a temporary file for atomic update
